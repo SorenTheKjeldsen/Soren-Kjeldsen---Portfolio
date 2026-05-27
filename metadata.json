@@ -1,0 +1,6 @@
+{
+  "name": "Bygningskonstruktør Portfolio",
+  "description": "En eksklusiv portfolio for en bygningskonstruktør, inspireret af luksuriøs ejendomsudvikling, med fremvisning af 3 udvalgte byggeprojekter.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
