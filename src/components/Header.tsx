@@ -74,7 +74,12 @@ export default function Header() {
   ];
   
   // Always use the solid header style if not on home page, or if scrolled
-  const isSolidHeader = isScrolled || location.pathname !== '/';
+  const isSolidHeader = isScrolled || (location.pathname !== '/' && location.pathname !== '/projekter');
+  
+  // When transparent on projekter, we are over a dark video
+  const isTransparentOnDark = !isScrolled && location.pathname === '/projekter';
+  const textColorClass = isTransparentOnDark ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-brand-green';
+  const logoFilter = isTransparentOnDark ? 'brightness-0 invert opacity-90' : 'mix-blend-multiply';
 
   return (
     <>
@@ -88,7 +93,7 @@ export default function Header() {
             <img 
               src={logoImage} 
               alt="Søren Kjeldsen Logo" 
-              className="h-14 md:h-16 w-auto mix-blend-multiply"
+              className={`h-14 md:h-16 w-auto transition-all duration-500 ${logoFilter}`}
             />
           </Link>
 
@@ -99,19 +104,19 @@ export default function Header() {
                 <div key={link.name} className="relative group">
                   <Link
                     to={link.href}
-                    className="text-sm tracking-[0.15em] transition-colors uppercase text-gray-600 hover:text-brand-green py-4"
+                    className={`text-sm tracking-[0.15em] transition-colors uppercase py-4 ${textColorClass}`}
                   >
                     {link.name}
                   </Link>
                   <div className="absolute top-full left-0 mt-0 pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <div className="bg-brand-sand/95 backdrop-blur-md border border-black/5 shadow-sm py-2">
-                      <Link to="/projekt/halgaard-daginstitution" className="block px-4 py-3 text-[11px] tracking-widest text-gray-600 hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
+                    <div className="bg-brand-sand/95 backdrop-blur-md border border-black/5 shadow-sm py-2 text-gray-600">
+                      <Link to="/projekt/halgaard-daginstitution" className="block px-4 py-3 text-[11px] tracking-widest hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
                         HALGÅRD DAGINSTITUTION
                       </Link>
-                      <Link to="/projekt/jm-moerks-gade" className="block px-4 py-3 text-[11px] tracking-widest text-gray-600 hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
+                      <Link to="/projekt/jm-moerks-gade" className="block px-4 py-3 text-[11px] tracking-widest hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
                         J. M. MØRKS GADE
                       </Link>
-                      <Link to="/projekt/lokesvej" className="block px-4 py-3 text-[11px] tracking-widest text-gray-600 hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
+                      <Link to="/projekt/lokesvej" className="block px-4 py-3 text-[11px] tracking-widest hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
                         LOKESVEJ
                       </Link>
                     </div>
@@ -121,7 +126,7 @@ export default function Header() {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-sm tracking-[0.15em] transition-colors uppercase text-gray-600 hover:text-brand-green"
+                  className={`text-sm tracking-[0.15em] transition-colors uppercase ${textColorClass}`}
                 >
                   {link.name}
                 </Link>
@@ -131,7 +136,7 @@ export default function Header() {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-gray-600 hover:text-dark-900 relative z-50"
+            className={`md:hidden relative z-50 transition-colors ${isTransparentOnDark ? 'text-white hover:text-white/80' : 'text-gray-600 hover:text-dark-900'}`}
             onClick={() => setIsOpen(true)}
           >
             <Menu size={28} strokeWidth={1.5} />

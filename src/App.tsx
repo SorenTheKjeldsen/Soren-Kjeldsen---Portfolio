@@ -9,6 +9,16 @@ import ProjectDetails from './components/ProjectDetails';
 
 import VideoSection from './components/VideoSection';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function Layout() {
   const location = useLocation();
   const hideContact = location.pathname !== '/' && location.pathname !== '/kontakt';
@@ -39,11 +49,17 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen font-sans">
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/projekter" element={<PageWrapper><Projects /></PageWrapper>} />
+            <Route path="/projekter" element={
+              <PageWrapper>
+                <VideoSection />
+                <Projects />
+              </PageWrapper>
+            } />
             <Route path="/om-mig" element={<PageWrapper><About /></PageWrapper>} />
             <Route path="/projekt/:id" element={<ProjectDetails />} />
           </Route>
