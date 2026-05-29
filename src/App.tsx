@@ -7,6 +7,8 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import ProjectDetails from './components/ProjectDetails';
 
+import VideoSection from './components/VideoSection';
+
 function Layout() {
   const location = useLocation();
   const hideContact = location.pathname !== '/' && location.pathname !== '/kontakt';
@@ -24,6 +26,7 @@ function Home() {
   return (
     <main>
       <Hero />
+      <VideoSection />
       <Projects />
     </main>
   );
