@@ -25,13 +25,12 @@ function Home() {
     <main>
       <Hero />
       <Projects />
-      <About />
     </main>
   );
 }
 
 function PageWrapper({ children }: { children: React.ReactNode }) {
-  return <main className="pt-20 lg:pt-32 pb-20">{children}</main>;
+  return <main>{children}</main>;
 }
 
 export default function App() {

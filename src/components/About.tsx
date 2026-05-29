@@ -79,62 +79,76 @@ export default function About() {
   ];
 
   return (
-    <section className="py-24 bg-brand-sand/30">
-      <div className="container mx-auto px-6 max-w-5xl">
-        
-        {/* Profil Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row gap-12 items-center md:items-start mb-24"
-        >
-          <div className="w-64 md:w-80 shrink-0 relative">
-            <div className="relative aspect-[3/4] z-10 w-full h-full bg-dark-800 overflow-hidden shadow-xl rounded-2xl group xl:cursor-pointer">
-              <img 
-                src={profileImage} 
-                alt="Søren Kjeldsen" 
-                className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-brand-sand/10 mix-blend-overlay" />
-            </div>
-          </div>
-          <div className="text-center md:text-left pt-2 md:pt-6">
-            <h1 className="text-4xl md:text-5xl font-serif text-dark-900 mb-2">SØREN KJELDSEN</h1>
-            <h2 className="text-xl md:text-2xl text-brand-green/80 font-medium mb-4">Bygningskonstruktør MAK</h2>
-            <p className="text-lg font-light text-dark-700 italic border-l-4 border-brand-green/30 pl-4 py-1 mb-8">
-              "Udadvendt og engageret bygningskonstruktør med håndværkerbaggrund og Revit i fingerspidserne"
-            </p>
-            <div className="space-y-4 text-dark-800 font-light leading-relaxed max-w-3xl">
-              <p>
-                Jeg er en bygningskonstruktør med tømrerbaggrund og stærk praktisk samt teknisk forståelse. 
-                Jeg arbejder struktureret med projekteringen af løsninger, hvor funktion, bygbarhed og æstetik går hånd i hånd.
-              </p>
-              <p>
-                Gennem min baggrund har jeg en solid forståelse for detaljering og udførelse, hvilket sikrer 
-                anvendelige løsninger på byggepladsen. Jeg er vant til at tage ansvar, skabe overblik og sikre 
-                fremdrift i samarbejde med både projekterende og udførende. Som person er jeg engageret og kvalitetsbevidst 
-                med et konstant fokus på gennemarbejdede løsninger samt faglig udvikling.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        <div className="space-y-24">
-          
-          {/* Main Content - Full Width */}
-          <div className="space-y-20">
-            
-            {/* Erhvervserfaring */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <div className="flex items-center gap-4 mb-12">
-                <Briefcase className="text-brand-green" size={28} strokeWidth={1.5} />
-                <h3 className="text-3xl font-serif text-dark-900 uppercase tracking-widest">Erhvervserfaring</h3>
+    <>
+      <section className="relative pt-32 pb-20 bg-brand-sand overflow-hidden">
+        <div className="container mx-auto px-6 max-w-5xl">
+          {/* Profil Header */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row gap-12 items-center md:items-start"
+          >
+            <div className="w-64 md:w-80 shrink-0 relative">
+              <div className="relative aspect-[3/4] z-10 w-full h-full bg-dark-800 overflow-hidden shadow-xl rounded-2xl group xl:cursor-pointer">
+                <img 
+                  src={profileImage} 
+                  alt="Søren Kjeldsen" 
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-brand-sand/10 mix-blend-overlay" />
               </div>
+            </div>
+            <div className="text-center md:text-left pt-2 md:pt-6 w-full">
+              <div className="flex items-center justify-center md:justify-start gap-4 mb-6">
+                <span className="w-12 h-[1px] bg-brand-green hidden md:block"></span>
+                <span className="text-brand-green tracking-[0.3em] font-medium text-xs lg:text-sm uppercase">Bygningskonstruktør MAK</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] mb-6 font-normal">
+                Søren <br className="hidden md:block" />
+                <span className="italic text-brand-green-light">Kjeldsen.</span>
+              </h1>
+              
+              <p className="text-lg font-light text-dark-700 italic border-l-4 border-brand-green/30 pl-4 py-1 mb-8">
+                "Udadvendt og engageret bygningskonstruktør med håndværkerbaggrund og Revit i fingerspidserne"
+              </p>
+              <div className="space-y-4 text-dark-800 font-light leading-relaxed max-w-3xl">
+                <p>
+                  Jeg er en bygningskonstruktør med tømrerbaggrund og stærk praktisk samt teknisk forståelse. 
+                  Jeg arbejder struktureret med projekteringen af løsninger, hvor funktion, bygbarhed og æstetik går hånd i hånd.
+                </p>
+                <p>
+                  Gennem min baggrund har jeg en solid forståelse for detaljering og udførelse, hvilket sikrer 
+                  anvendelige løsninger på byggepladsen. Jeg er vant til at tage ansvar, skabe overblik og sikre 
+                  fremdrift i samarbejde med både projekterende og udførende. Som person er jeg engageret og kvalitetsbevidst 
+                  med et konstant fokus på gennemarbejdede løsninger samt faglig udvikling.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-32 bg-brand-sand-light overflow-hidden">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="space-y-24">
+            
+            {/* Main Content - Full Width */}
+            <div className="space-y-20">
+              
+              {/* Erhvervserfaring */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <div className="text-center mb-16">
+                  <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase flex items-center justify-center gap-3 mb-4">
+                    <Briefcase size={20} strokeWidth={1.5} /> Professionel
+                  </span>
+                  <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Erhvervserfaring</h2>
+                </div>
               
               <div className="space-y-8 relative before:absolute before:inset-y-0 before:left-[15px] md:before:left-[27px] before:w-[2px] before:bg-black/10">
                 {experiences.map((exp, idx) => (
@@ -168,9 +182,11 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              <div className="flex items-center gap-4 mb-12">
-                <GraduationCap className="text-brand-green" size={28} strokeWidth={1.5} />
-                <h3 className="text-3xl font-serif text-dark-900 uppercase tracking-widest">Uddannelse</h3>
+              <div className="text-center mb-16">
+                <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase flex items-center justify-center gap-3 mb-4">
+                  <GraduationCap size={20} strokeWidth={1.5} /> Akademisk
+                </span>
+                <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Uddannelse</h2>
               </div>
               
               <div className="space-y-8 relative before:absolute before:inset-y-0 before:left-[15px] md:before:left-[27px] before:w-[2px] before:bg-black/10">
@@ -281,5 +297,6 @@ export default function About() {
 
       </div>
     </section>
+    </>
   );
 }
