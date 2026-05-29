@@ -8,6 +8,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [headerBgClass, setHeaderBgClass] = useState('bg-brand-sand/95');
+  const [isOverDarkSection, setIsOverDarkSection] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,16 +18,17 @@ export default function Header() {
       // Determine background color based on what is underneath the header
       const sections = document.querySelectorAll('section, footer, main, div');
       let currentBg = 'bg-brand-sand/95';
+      let darkSection = false;
       let foundMatchingSection = false;
       
-      const headerCenterY = 50; // top area
+      const headerCenterY = 40; // top area
       
       // Look at elements in reverse order so children override parents if they are full width
       const arr = Array.from(sections);
       for (let i = arr.length - 1; i >= 0; i--) {
         const section = arr[i];
         const rect = section.getBoundingClientRect();
-        const classes = section.className || '';
+        const classes = typeof section.className === 'string' ? section.className : '';
         
         // Ensure it's a block with a recognized background string
         if (
@@ -35,7 +37,11 @@ export default function Header() {
           rect.bottom >= headerCenterY &&
           rect.width > window.innerWidth * 0.5 // Mostly full-width elements
         ) {
-          if (classes.includes('bg-brand-sand-light')) {
+          if (classes.includes('bg-dark-900') || classes.includes('bg-dark-800') || section.id === 'video-section') {
+            currentBg = 'transparent';
+            darkSection = true;
+            foundMatchingSection = true;
+          } else if (classes.includes('bg-brand-sand-light')) {
             currentBg = 'bg-brand-sand-light/95';
             foundMatchingSection = true;
           } else if (classes.includes('bg-brand-sand') && !classes.includes('bg-brand-sand-light')) {
@@ -44,8 +50,6 @@ export default function Header() {
           } else if (classes.includes('bg-white ')) {
             currentBg = 'bg-white/95';
             foundMatchingSection = true;
-          } else if (classes.includes('bg-brand-green/')) {
-            // maybe an accent section
           } else if (classes.includes('bg-brand-green')) {
             currentBg = 'bg-brand-green/95';
             foundMatchingSection = true;
@@ -54,6 +58,7 @@ export default function Header() {
       }
       
       setHeaderBgClass(currentBg);
+      setIsOverDarkSection(darkSection);
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -73,11 +78,11 @@ export default function Header() {
     { name: 'KONTAKT', href: '/kontakt' },
   ];
   
-  // Always use the solid header style if not on home page, or if scrolled
-  const isSolidHeader = isScrolled || (location.pathname !== '/' && location.pathname !== '/projekter');
+  // When over a dark section (like video) OR at the top of /projekter
+  const isTransparentOnDark = isOverDarkSection || (!isScrolled && location.pathname === '/projekter');
   
-  // When transparent on projekter, we are over a dark video
-  const isTransparentOnDark = !isScrolled && location.pathname === '/projekter';
+  const isSolidHeader = (isScrolled || (location.pathname !== '/' && location.pathname !== '/projekter')) && !isTransparentOnDark;
+  
   const textColorClass = isTransparentOnDark ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-brand-green';
   const logoFilter = isTransparentOnDark ? 'brightness-0 invert opacity-90' : 'mix-blend-multiply';
 
@@ -85,7 +90,11 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isSolidHeader ? `${headerBgClass} backdrop-blur-md py-2 border-b border-black/5` : 'bg-transparent py-4'
+          isSolidHeader 
+            ? `${headerBgClass} backdrop-blur-md py-2 border-b border-black/5` 
+            : isTransparentOnDark && isScrolled
+              ? 'bg-transparent py-2'
+              : 'bg-transparent py-4'
         }`}
       >
         <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">

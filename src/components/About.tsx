@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import profileImage from '../assets/images/Portræt.png';
 
 export default function About() {
@@ -66,16 +67,12 @@ export default function About() {
   ];
 
   const itSkills = [
-    { name: 'Revit', level: 'Højt niveau' },
-    { name: 'AutoCAD', level: 'Mellemniveau' },
-    { name: 'Visualisering i TwinMotion', level: 'Mellemniveau' },
-    { name: 'Microsoft Office', level: 'Højt niveau' },
-    { name: 'Microsoft Project', level: 'Mellemniveau' },
-    { name: 'Sigma Enterprise', level: 'Brugerniveau' },
+    'Revit', 'AutoCAD', 'TwinMotion', 'Microsoft Office', 
+    'Microsoft Project', 'Sigma Enterprise', 'Forma', 'BE18', 'LCA-byg'
   ];
 
   const personalSkills = [
-    'Tekniske beskrivelser', 'Dokumenthåndtering', 'Samarbejde i teams', 'Praktisk & teknisk forståelse'
+    'Grammatik', 'Kvalitetsbevidst', 'Positiv & energisk', 'Tekniske beskrivelser', 'Dokumenthåndtering', 'Samarbejde i teams', 'Praktisk forståelse'
   ];
 
   return (
@@ -175,8 +172,14 @@ export default function About() {
                 ))}
               </div>
             </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            {/* Uddannelse */}
+    {/* Uddannelse */}
+      <section className="py-24 bg-brand-sand overflow-hidden">
+        <div className="container mx-auto px-6 max-w-5xl">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -184,7 +187,7 @@ export default function About() {
             >
               <div className="text-center mb-16">
                 <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase flex items-center justify-center gap-3 mb-4">
-                  <GraduationCap size={20} strokeWidth={1.5} /> Akademisk
+                  <GraduationCap size={20} strokeWidth={1.5} /> Faglig
                 </span>
                 <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Uddannelse</h2>
               </div>
@@ -207,12 +210,13 @@ export default function About() {
                 ))}
               </div>
             </motion.div>
-          </div>
+        </div>
+      </section>
 
-          <hr className="border-black/5" />
-
+      <section className="py-24 bg-brand-sand-light overflow-hidden">
+        <div className="container mx-auto px-6 max-w-5xl">
           {/* Bottom Grid Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             
             <div className="space-y-12">
               {/* IT-Kompetencer */}
@@ -226,14 +230,13 @@ export default function About() {
                   <MonitorDot className="text-brand-green" size={24} strokeWidth={1.5} />
                   <h3 className="text-xl font-serif text-dark-900 uppercase tracking-wider">IT-Kompetencer</h3>
                 </div>
-                <ul className="space-y-4">
+                <div className="flex flex-wrap gap-2">
                   {itSkills.map((skill, idx) => (
-                    <li key={idx}>
-                      <div className="text-sm font-medium text-dark-800">{skill.name}</div>
-                      <div className="text-xs text-dark-500 font-light">{skill.level}</div>
-                    </li>
+                    <span key={idx} className="px-4 py-2 bg-brand-sand/50 text-dark-700 rounded-lg text-sm tracking-wide border border-white/50">
+                      {skill}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </motion.div>
 
               {/* Sprog */}
@@ -247,9 +250,12 @@ export default function About() {
                   <Globe className="text-brand-green" size={24} strokeWidth={1.5} />
                   <h3 className="text-xl font-serif text-dark-900 uppercase tracking-wider">Sprog</h3>
                 </div>
-                <div className="space-y-3 text-sm text-dark-700 font-light">
-                  <p><span className="font-medium text-dark-900 block mb-0.5">Dansk:</span> Modersmål</p>
-                  <p><span className="font-medium text-dark-900 block mb-0.5">Engelsk:</span> Flydende (skrift & tale)</p>
+                <div className="flex flex-wrap gap-2">
+                  {['Dansk', 'Engelsk'].map((lang, idx) => (
+                    <span key={idx} className="px-4 py-2 bg-brand-sand/50 text-dark-700 rounded-lg text-sm tracking-wide border border-white/50">
+                      {lang}
+                    </span>
+                  ))}
                 </div>
               </motion.div>
             </div>
@@ -264,7 +270,7 @@ export default function About() {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <UserRound className="text-brand-green" size={24} strokeWidth={1.5} />
-                  <h3 className="text-xl font-serif text-dark-900 uppercase tracking-wider">Lidt om mine styrker</h3>
+                  <h3 className="text-xl font-serif text-dark-900 uppercase tracking-wider">MINE STYRKER</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {personalSkills.map((skill, idx) => (
@@ -287,14 +293,39 @@ export default function About() {
                   <h3 className="text-xl font-serif text-dark-900 uppercase tracking-wider">Interesser</h3>
                 </div>
                 <p className="text-sm font-light text-dark-700 leading-relaxed">
-                  Når jeg ikke projekterer, prioriterer jeg at holde mig aktiv – om det så er med sport, outdoor-aktiviteter eller i godt selskab med venner og familie.
+                  I min fritid interesserer jeg mig for løbetræning, møbeldesign og træarbejde. Jeg bruger også meget tid sammen med venner og familie og nyder at følge med i fodbold, hvor særligt Premier League har min interesse.
                 </p>
               </motion.div>
             </div>
 
           </div>
         </div>
+    </section>
 
+    {/* Contact CTA */}
+    <section className="py-24 bg-brand-sand overflow-hidden relative">
+      <div className="container mx-auto px-6 max-w-5xl relative z-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="space-y-8"
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif text-dark-900 uppercase tracking-wider">
+            Lyder det interessant?
+          </h2>
+          <p className="text-lg md:text-xl text-dark-700 font-light max-w-2xl mx-auto">
+            Så kontakt mig og lad os tage en uforpligtende snak om, hvordan vi kan samarbejde.
+          </p>
+          <div className="pt-8">
+            <Link 
+              to="/kontakt" 
+              className="inline-flex items-center justify-center border border-dark-900/10 text-dark-800 px-10 py-5 uppercase tracking-widest text-sm hover:border-brand-green hover:text-brand-green hover:bg-white/50 bg-white/30 transition-all"
+            >
+              KONTAKT MIG
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </section>
     </>
