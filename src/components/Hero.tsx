@@ -51,12 +51,12 @@ export default function Hero() {
               >
                 SE PROJEKTER <ArrowRight size={16} />
               </Link>
-              <a 
-                href="#om-mig-scroll" 
+              <Link 
+                to="/om-mig" 
                 className="group flex items-center justify-center gap-3 border border-dark-900/10 text-dark-800 px-8 py-4 uppercase tracking-widest text-sm hover:border-brand-green hover:text-brand-green transition-all"
               >
                 LÆS MERE OM MIG
-              </a>
+              </Link>
             </div>
           </motion.div>
 
@@ -84,7 +84,7 @@ export default function Hero() {
       {/* Scroll indicator */}
       <div className="w-full absolute bottom-8 left-0 flex justify-center z-20">
         <motion.a 
-          href="#om-mig-scroll"
+          href="#video-section"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
