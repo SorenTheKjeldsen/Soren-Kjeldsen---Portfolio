@@ -108,24 +108,28 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => (
-              link.name === 'PROJEKTER' ? (
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.href || (link.href === '/projekter' && location.pathname.startsWith('/projekt/'));
+              const linkColorClass = isActive 
+                ? (isTransparentOnDark ? 'text-white font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'text-brand-green font-semibold') 
+                : (isTransparentOnDark ? 'text-white/70 hover:text-white' : 'text-gray-600 hover:text-brand-green');
+              return link.name === 'PROJEKTER' ? (
                 <div key={link.name} className="relative group">
                   <Link
                     to={link.href}
-                    className={`text-sm tracking-[0.15em] transition-colors uppercase py-4 ${textColorClass}`}
+                    className={`text-sm tracking-[0.15em] transition-colors uppercase py-4 ${linkColorClass}`}
                   >
                     {link.name}
                   </Link>
                   <div className="absolute top-full left-0 mt-0 pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <div className="bg-brand-sand/95 backdrop-blur-md border border-black/5 shadow-sm py-2 text-gray-600">
-                      <Link to="/projekt/halgaard-daginstitution" className="block px-4 py-3 text-[11px] tracking-widest hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
+                    <div className={`bg-transparent py-2 ${isTransparentOnDark ? 'text-white' : 'text-gray-600'}`}>
+                      <Link to="/projekt/halgaard-daginstitution" className={`block px-4 py-3 text-[11px] tracking-widest transition-colors uppercase ${isTransparentOnDark ? 'hover:text-white hover:bg-white/10' : 'hover:text-brand-green hover:bg-brand-sand-light'}`}>
                         HALGÅRD DAGINSTITUTION
                       </Link>
-                      <Link to="/projekt/jm-moerks-gade" className="block px-4 py-3 text-[11px] tracking-widest hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
+                      <Link to="/projekt/jm-moerks-gade" className={`block px-4 py-3 text-[11px] tracking-widest transition-colors uppercase ${isTransparentOnDark ? 'hover:text-white hover:bg-white/10' : 'hover:text-brand-green hover:bg-brand-sand-light'}`}>
                         J. M. MØRKS GADE
                       </Link>
-                      <Link to="/projekt/lokesvej" className="block px-4 py-3 text-[11px] tracking-widest hover:text-brand-green hover:bg-brand-sand-light transition-colors uppercase">
+                      <Link to="/projekt/lokesvej" className={`block px-4 py-3 text-[11px] tracking-widest transition-colors uppercase ${isTransparentOnDark ? 'hover:text-white hover:bg-white/10' : 'hover:text-brand-green hover:bg-brand-sand-light'}`}>
                         LOKESVEJ
                       </Link>
                     </div>
@@ -135,12 +139,12 @@ export default function Header() {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`text-sm tracking-[0.15em] transition-colors uppercase ${textColorClass}`}
+                  className={`text-sm tracking-[0.15em] transition-colors uppercase ${linkColorClass}`}
                 >
                   {link.name}
                 </Link>
-              )
-            ))}
+              );
+            })}
           </nav>
 
           {/* Mobile Toggle */}
@@ -170,16 +174,19 @@ export default function Header() {
               <X size={32} strokeWidth={1} />
             </button>
             <div className="flex flex-col items-center gap-10">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-2xl font-serif tracking-widest text-dark-900 hover:text-brand-green transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.href || (link.href === '/projekter' && location.pathname.startsWith('/projekt/'));
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-2xl font-serif tracking-widest transition-colors ${isActive ? 'text-brand-green' : 'text-dark-900 hover:text-brand-green'}`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         )}

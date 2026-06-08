@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import profileImage from '../assets/images/Portræt.png';
+import profileImage from '../assets/images/Billede fra BAKS.png';
 
 export default function About() {
   const experiences = [

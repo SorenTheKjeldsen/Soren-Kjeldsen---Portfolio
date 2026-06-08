@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import portraitImage from '../assets/images/Portræt.png';
+import portraitImage from '../assets/images/Billede fra BAKS.png';
 
 export default function Hero() {
   return (
