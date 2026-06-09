@@ -2,6 +2,9 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 
+import detGroenneImage from '../assets/images/Det Grønne Enfamiliehus.jpg';
+import detGroennePdf from '../data/Det grønne enfamiliehus - LF 7. Semester.pdf';
+
 export default function Projects() {
   return (
     <>
@@ -117,20 +120,43 @@ export default function Projects() {
               Sektion under opbygning - flere projekter vil løbende blive tilføjet
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+            {[
+              { id: 1, title: 'Det Grønne Enfamiliehus', subtitle: 'LF Undersøgelse - 7. semester', image: detGroenneImage, pdf: detGroennePdf },
+              { id: 2, title: 'Kommer snart' },
+              { id: 3, title: 'Kommer snart' }
+            ].map((item, idx) => (
               <motion.div
-                key={item}
+                key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ delay: item * 0.1 }}
-                className="bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/60 shadow-sm flex flex-col justify-center items-center h-64 hover:bg-white/80 transition-colors"
+                transition={{ delay: item.id * 0.1 }}
+                className={`bg-white/50 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm flex flex-col items-center hover:bg-white/80 transition-colors overflow-hidden relative ${item.image ? 'p-0 group h-auto' : 'p-8 justify-center h-full min-h-[16rem]'}`}
               >
-                <div className="w-16 h-16 rounded-full bg-brand-sand mb-4 flex items-center justify-center text-brand-green opacity-50">
-                  +
-                </div>
-                <h3 className="font-serif text-xl text-dark-800 uppercase tracking-widest text-center">Kommer snart</h3>
+                {item.image ? (
+                  <div className="w-full flex flex-col h-full">
+                    <div className="relative h-48 w-full overflow-hidden shrink-0 bg-brand-sand">
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                    <div className="p-6 flex flex-col items-center text-center flex-grow">
+                      <h3 className="font-serif text-xl tracking-widest text-dark-900 uppercase mb-2">{item.title}</h3>
+                      {item.subtitle && <p className="text-dark-700 text-sm mb-6 font-light">{item.subtitle}</p>}
+                      {item.pdf && (
+                        <a href={item.pdf} download className="mt-auto bg-brand-sand text-dark-900 border border-black/10 hover:bg-brand-green hover:border-brand-green hover:text-white px-6 py-2.5 rounded-full text-xs font-medium transition-all duration-300 uppercase tracking-widest inline-flex items-center justify-center gap-2">
+                          Download Projekt
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="w-16 h-16 rounded-full bg-brand-sand mb-4 flex items-center justify-center text-brand-green opacity-50">
+                      +
+                    </div>
+                    <h3 className="font-serif text-xl text-dark-800 uppercase tracking-widest text-center">{item.title}</h3>
+                  </>
+                )}
               </motion.div>
             ))}
           </div>

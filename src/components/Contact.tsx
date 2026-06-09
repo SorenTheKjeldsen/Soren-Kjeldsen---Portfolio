@@ -1,8 +1,9 @@
 import { motion } from 'motion/react';
-import { ArrowUpRight, Send, CheckCircle2, Phone, Mail, Linkedin } from 'lucide-react';
+import { ArrowUpRight, Send, CheckCircle2, Phone, Mail } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoImage from '../assets/images/4K Logo.webp';
+import linkedinLogo from '../assets/images/Linkedin-Logo.png';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -51,7 +52,7 @@ export default function Contact() {
   };
 
   return (
-    <footer id="contact" className="bg-brand-sand border-t border-brand-green/10 pt-32 pb-12 relative overflow-hidden">
+    <footer id="contact" className="bg-brand-sand pt-16 lg:pt-24 pb-12 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-64 bg-brand-green/5 blur-[120px] rounded-full pointer-events-none" />
       
@@ -69,8 +70,8 @@ export default function Contact() {
               <span className="whitespace-nowrap">Lad os tage en snak</span> <br />
               <span className="italic text-brand-green-light">over en kop kaffe.</span>
             </h2>
-            <p className="text-dark-800 font-light max-w-md mb-12">
-              Står du med et projekt, der kræver kompromisløs projektstyring og teknisk formgivning? Kontakt mig for en uforpligtende dialog.
+            <p className="text-dark-800 font-light max-w-[600px] mb-12 leading-relaxed">
+              Jeg hjælper med at skabe gennemtænkte og byggeteknisk velfungerende løsninger. Uanset om det gælder nybyggeri, tilbygninger eller renovering, kan jeg bidrage med projektering, byggetilladelser, tekniske løsninger og rådgivning gennem hele processen.
             </p>
 
           </motion.div>
@@ -177,23 +178,11 @@ export default function Contact() {
                  <Mail size={14} className="text-dark-600 group-hover:text-brand-green transition-colors shrink-0" />
                  soren.kjeldsen@hotmail.com
                </div>
-               <a href="https://www.linkedin.com/in/soerenkjeldsen/" target="_blank" rel="noopener noreferrer" className="group flex justify-center items-center gap-1.5 sm:gap-2 bg-white/30 border border-black/5 hover:bg-white/50 hover:border-brand-green text-dark-900 px-3 sm:px-4 py-2 rounded-full transition-all duration-300 font-sans font-medium text-[10px] sm:text-xs">
-                 <Linkedin size={14} fill="currentColor" className="text-dark-600 group-hover:text-[#0A66C2] transition-colors shrink-0" />
-                 LinkedIn
+               <a href="https://www.linkedin.com/in/soerenkjeldsen/" target="_blank" rel="noopener noreferrer" className="group flex justify-center items-center bg-white/30 border border-black/5 hover:bg-white/50 hover:border-brand-green px-3 sm:px-4 rounded-full transition-all duration-300 shrink-0 overflow-hidden">
+                 <img src={linkedinLogo} alt="LinkedIn" className="h-[32px] sm:h-[34px] w-auto object-contain" />
                </a>
             </div>
           </motion.div>
-        </div>
-        
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between pt-8 mt-16 border-t border-black/10 text-xs text-gray-500 tracking-wider">
-          <Link to="/">
-            <img 
-              src={logoImage} 
-              alt="Søren Kjeldsen Logo" 
-              className="h-16 md:h-20 w-auto opacity-50 grayscale mix-blend-multiply mb-4 md:mb-0 hover:opacity-100 transition-opacity block"
-            />
-          </Link>
-          <p>© {new Date().getFullYear()} SØREN KJELDSEN. Alle rettigheder forbeholdes.</p>
         </div>
       </div>
     </footer>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logoImage from '../assets/images/4K Logo.webp';
 
@@ -30,14 +30,16 @@ export default function Header() {
         const rect = section.getBoundingClientRect();
         const classes = typeof section.className === 'string' ? section.className : '';
         
+        const isHeaderDetect = classes.includes('js-header-detect');
+        
         // Ensure it's a block with a recognized background string
         if (
           !foundMatchingSection &&
           rect.top <= headerCenterY && 
           rect.bottom >= headerCenterY &&
-          rect.width > window.innerWidth * 0.5 // Mostly full-width elements
+          (rect.width > window.innerWidth * 0.5 || isHeaderDetect) // Mostly full-width elements or explicitly marked
         ) {
-          if (classes.includes('bg-dark-900') || classes.includes('bg-dark-800') || section.id === 'video-section') {
+          if (classes.includes('bg-dark-900') || classes.includes('bg-dark-800') || section.id === 'video-section' || isHeaderDetect) {
             currentBg = 'transparent';
             darkSection = true;
             foundMatchingSection = true;
@@ -83,8 +85,8 @@ export default function Header() {
   
   const isSolidHeader = (isScrolled || (location.pathname !== '/' && location.pathname !== '/projekter')) && !isTransparentOnDark;
   
-  const textColorClass = isTransparentOnDark ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-brand-green';
-  const logoFilter = isTransparentOnDark ? 'brightness-0 invert opacity-90' : 'mix-blend-multiply';
+  const textColorClass = isTransparentOnDark ? 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] hover:text-brand-green' : 'text-gray-600 hover:text-brand-green';
+  const logoFilter = isTransparentOnDark ? 'brightness-0 invert opacity-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]' : 'mix-blend-multiply';
 
   return (
     <>
@@ -111,8 +113,8 @@ export default function Header() {
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href || (link.href === '/projekter' && location.pathname.startsWith('/projekt/'));
               const linkColorClass = isActive 
-                ? (isTransparentOnDark ? 'text-white font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'text-brand-green font-semibold') 
-                : (isTransparentOnDark ? 'text-white/70 hover:text-white' : 'text-gray-600 hover:text-brand-green');
+                ? (isTransparentOnDark ? 'text-white font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]' : 'text-brand-green font-semibold') 
+                : (isTransparentOnDark ? 'text-white hover:text-brand-green drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]' : 'text-gray-600 hover:text-brand-green');
               return link.name === 'PROJEKTER' ? (
                 <div key={link.name} className="relative group">
                   <Link
@@ -121,15 +123,18 @@ export default function Header() {
                   >
                     {link.name}
                   </Link>
-                  <div className="absolute top-full left-0 mt-0 pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <div className={`bg-transparent py-2 ${isTransparentOnDark ? 'text-white' : 'text-gray-600'}`}>
-                      <Link to="/projekt/halgaard-daginstitution" className={`block px-4 py-3 text-[11px] tracking-widest transition-colors uppercase ${isTransparentOnDark ? 'hover:text-white hover:bg-white/10' : 'hover:text-brand-green hover:bg-brand-sand-light'}`}>
+                  <div className="absolute top-[80%] left-0 pt-6 w-max opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <div className={`bg-transparent flex flex-col gap-3 pt-2 ${isTransparentOnDark ? 'text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]' : 'text-gray-500'}`}>
+                      <Link to="/projekt/halgaard-daginstitution" className={`flex items-center gap-1 text-[11px] tracking-widest transition-all uppercase ${isTransparentOnDark ? 'hover:text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] hover:translate-x-1' : 'hover:text-brand-green hover:translate-x-1'}`}>
+                        <ChevronRight size={12} className="opacity-70" />
                         HALGÅRD DAGINSTITUTION
                       </Link>
-                      <Link to="/projekt/jm-moerks-gade" className={`block px-4 py-3 text-[11px] tracking-widest transition-colors uppercase ${isTransparentOnDark ? 'hover:text-white hover:bg-white/10' : 'hover:text-brand-green hover:bg-brand-sand-light'}`}>
+                      <Link to="/projekt/jm-moerks-gade" className={`flex items-center gap-1 text-[11px] tracking-widest transition-all uppercase ${isTransparentOnDark ? 'hover:text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] hover:translate-x-1' : 'hover:text-brand-green hover:translate-x-1'}`}>
+                        <ChevronRight size={12} className="opacity-70" />
                         J. M. MØRKS GADE
                       </Link>
-                      <Link to="/projekt/lokesvej" className={`block px-4 py-3 text-[11px] tracking-widest transition-colors uppercase ${isTransparentOnDark ? 'hover:text-white hover:bg-white/10' : 'hover:text-brand-green hover:bg-brand-sand-light'}`}>
+                      <Link to="/projekt/lokesvej" className={`flex items-center gap-1 text-[11px] tracking-widest transition-all uppercase ${isTransparentOnDark ? 'hover:text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] hover:translate-x-1' : 'hover:text-brand-green hover:translate-x-1'}`}>
+                        <ChevronRight size={12} className="opacity-70" />
                         LOKESVEJ
                       </Link>
                     </div>

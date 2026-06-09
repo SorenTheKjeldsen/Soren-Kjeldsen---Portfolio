@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 import ProjectDetails from './components/ProjectDetails';
 
 import VideoSection from './components/VideoSection';
@@ -28,6 +29,7 @@ function Layout() {
       <Header />
       <Outlet />
       {!hideContact && <Contact />}
+      <Footer />
     </>
   );
 }
@@ -67,7 +69,7 @@ export default function App() {
           <Route path="/kontakt" element={
             <main className="bg-brand-sand min-h-screen">
               <Header />
-              <div className="pt-32 lg:pt-48 pb-8">
+              <div className="pt-32 lg:pt-40 pb-0">
                 <div className="container mx-auto px-6 max-w-7xl">
                   <div className="text-center">
                     <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Kontakt</h2>
@@ -78,6 +80,7 @@ export default function App() {
                 </div>
               </div>
               <Contact />
+              <Footer />
             </main>
           } />
         </Routes>

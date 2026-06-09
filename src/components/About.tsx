@@ -57,7 +57,8 @@ export default function About() {
     {
       school: 'VIA University College, 8000 Aarhus C',
       degree: 'Bygningskonstruktør, Projekterende',
-      period: '2022 - 2026'
+      period: '2022 - 2026',
+      badge: 'NYT'
     },
     {
       school: 'Hansenberg Teknisk Gymnasium, 6000 Kolding',
@@ -197,7 +198,16 @@ export default function About() {
                   <div key={idx} className="relative pl-12 md:pl-20">
                     <div className="absolute left-[8px] md:left-[20px] top-6 w-4 h-4 bg-brand-green rounded-full shadow-[0_0_0_4px_rgba(255,255,255,0.5)] border-2 border-transparent" />
                     
-                    <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-white/60 hover:bg-white/70 transition-colors">
+                    <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-white/60 hover:bg-white/70 transition-colors relative">
+                      {edu.badge && (
+                        <motion.div
+                          animate={{ scale: [1, 1.05, 1] }}
+                          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                          className="absolute -top-3 left-6 md:left-8 bg-brand-green text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full shadow-md"
+                        >
+                          {edu.badge}
+                        </motion.div>
+                      )}
                       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                         <div>
                           <h4 className="text-lg md:text-xl font-medium text-dark-900 mb-1">{edu.school}</h4>

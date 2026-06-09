@@ -41,7 +41,8 @@ export default function Hero() {
             </motion.div>
             
             <p className="text-lg md:text-xl text-gray-500 max-w-xl font-light leading-relaxed mb-12">
-              Udadvendt og engageret bygningskonstruktør med håndværkerbaggrund og Revit i fingerspidserne. Jeg bygger bro mellem kompleks byggeteknik og praktisk udførelse.
+              Udadvendt og engageret bygningskonstruktør med håndværkerbaggrund og projektering i fingerspidserne. <br />
+              Jeg bygger bro mellem kompleks byggeteknik og praktisk udførelse.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6">
