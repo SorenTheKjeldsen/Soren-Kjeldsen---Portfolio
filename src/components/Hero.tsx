@@ -7,40 +7,25 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-brand-sand top-0">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center lg:items-stretch">
           
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="order-2 lg:order-1"
+            className="order-2 lg:order-1 flex flex-col justify-between py-4"
           >
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-4">
               <span className="w-12 h-[1px] bg-brand-green block"></span>
               <span className="text-brand-green tracking-[0.3em] font-medium text-xs lg:text-sm uppercase">Bygningskonstruktør | Tømrer</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] mb-6 font-normal">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] font-normal">
               Søren <br />
               <span className="italic text-brand-green-light">Kjeldsen.</span>
             </h1>
             
-            <motion.div 
-              animate={{ 
-                y: [0, -10, 0],
-                backgroundColor: ["rgba(151,169,150,0.05)", "rgba(151,169,150,0.2)", "rgba(151,169,150,0.05)"] 
-              }}
-              transition={{ 
-                y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                backgroundColor: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-              }}
-              className="inline-flex items-center gap-3 px-4 py-2 border border-brand-green/30 rounded-full mb-8"
-            >
-              <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
-              <span className="text-xs uppercase tracking-widest text-brand-green font-medium">Jobsøgende</span>
-            </motion.div>
-            
-            <p className="text-lg md:text-xl text-gray-500 max-w-xl font-light leading-relaxed mb-12">
+            <p className="text-lg md:text-xl text-gray-500 max-w-xl font-light leading-relaxed">
               Udadvendt og engageret bygningskonstruktør med håndværkerbaggrund og projektering i fingerspidserne. <br />
               Jeg bygger bro mellem kompleks byggeteknik og praktisk udførelse.
             </p>

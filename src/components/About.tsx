@@ -6,6 +6,12 @@ import profileImage from '../assets/images/Billede fra BAKS.png';
 export default function About() {
   const experiences = [
     {
+      company: 'Vang Arkitekter, 8000 Aarhus C',
+      role: 'Bygningskonstruktør, projekterende',
+      period: '2026 - nu',
+      tasks: []
+    },
+    {
       company: 'Baks Arkitekter, 8250 Egå',
       role: 'Praktikant, studiemedhjælper',
       period: '2025 - 7 mdr.',
@@ -16,7 +22,7 @@ export default function About() {
       ]
     },
     {
-      company: 'Hustømrerne A/S, 8200 Aarhus',
+      company: 'Hustømrerne A/S, 8200 Aarhus N',
       role: 'Tømrersvend',
       period: '2021 - 2022',
       tasks: [
@@ -78,17 +84,17 @@ export default function About() {
 
   return (
     <>
-      <section className="relative pt-32 pb-20 bg-brand-sand overflow-hidden">
-        <div className="container mx-auto px-6 max-w-5xl">
+      <section className="relative min-h-screen flex items-center pt-32 pb-20 bg-brand-sand overflow-hidden top-0">
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
           {/* Profil Header */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row gap-12 items-center md:items-start"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start"
           >
-            <div className="w-64 md:w-80 shrink-0 relative">
-              <div className="relative aspect-[3/4] z-10 w-full h-full bg-dark-800 overflow-hidden shadow-xl rounded-2xl group xl:cursor-pointer">
+            <div className="relative aspect-[3/4] max-w-md mx-auto lg:mr-auto lg:ml-0 w-full shrink-0">
+              <div className="relative z-10 w-full h-full bg-dark-800 overflow-hidden shadow-xl rounded-2xl group xl:cursor-pointer">
                 <img 
                   src={profileImage} 
                   alt="Søren Kjeldsen" 
@@ -97,10 +103,10 @@ export default function About() {
                 <div className="absolute inset-0 bg-brand-sand/10 mix-blend-overlay" />
               </div>
             </div>
-            <div className="text-center md:text-left pt-2 md:pt-6 w-full">
-              <div className="flex items-center justify-center md:justify-start gap-4 mb-6">
-                <span className="w-12 h-[1px] bg-brand-green hidden md:block"></span>
-                <span className="text-brand-green tracking-[0.3em] font-medium text-xs lg:text-sm uppercase">Bygningskonstruktør MAK</span>
+            <div className="text-center lg:text-left">
+              <div className="flex items-center justify-center lg:justify-start gap-4 mb-6">
+                <span className="w-12 h-[1px] bg-brand-green hidden lg:block"></span>
+                <span className="text-brand-green tracking-[0.3em] font-medium text-xs lg:text-sm uppercase">Bygningskonstruktør | Tømrer</span>
               </div>
               
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] mb-6 font-normal">
@@ -108,19 +114,21 @@ export default function About() {
                 <span className="italic text-brand-green-light">Kjeldsen.</span>
               </h1>
               
-              <p className="text-lg font-light text-dark-700 italic border-l-4 border-brand-green/30 pl-4 py-1 mb-8">
-                "Udadvendt og engageret bygningskonstruktør med håndværkerbaggrund og Revit i fingerspidserne"
-              </p>
-              <div className="space-y-4 text-dark-800 font-light leading-relaxed max-w-3xl">
+              <div className="space-y-4 text-dark-800 font-light leading-relaxed text-justify">
                 <p>
-                  Jeg er en bygningskonstruktør med tømrerbaggrund og stærk praktisk samt teknisk forståelse. 
-                  Jeg arbejder struktureret med projekteringen af løsninger, hvor funktion, bygbarhed og æstetik går hånd i hånd.
+                  Jeg blev færdiguddannet bygningskonstruktør i januar 2026 og har en særlig interesse for BIM, projektering og koordinering. Jeg kan godt lide, når ting er gennemtænkte, strukturerede og ser professionelle ud – hvad enten det gælder en BIM-model, et tegningssæt eller andet.
                 </p>
                 <p>
-                  Gennem min baggrund har jeg en solid forståelse for detaljering og udførelse, hvilket sikrer 
-                  anvendelige løsninger på byggepladsen. Jeg er vant til at tage ansvar, skabe overblik og sikre 
-                  fremdrift i samarbejde med både projekterende og udførende. Som person er jeg engageret og kvalitetsbevidst 
-                  med et konstant fokus på gennemarbejdede løsninger samt faglig udvikling.
+                  Jeg er typen, der lægger mærke til detaljerne. Ikke fordi alt skal være perfekt, men fordi de små ting ofte er det, der får helheden til at fungere. Derfor bruger jeg også gerne lidt ekstra tid på layout, formidling og det visuelle udtryk. Et godt projekt skal ikke kun være teknisk korrekt – det skal også være let at forstå og rart at arbejde videre med.
+                </p>
+                <p>
+                  Gennem min uddannelse og praktik har jeg arbejdet med projektering, visualisering og teknisk dokumentation. Jeg motiveres af nytænkende opgaver, især når de kan brydes ned til overskuelige løsninger. Der er noget tilfredsstillende ved at få mange brikker til at falde på plads og skabe et resultat, der fungerer i praksis.
+                </p>
+                <p>
+                  Jeg kommer oprindeligt fra Vejen, men bor i dag i Risskov sammen med min kæreste. Uden for arbejdet bruger jeg blandt andet tid på møbeldesign, forskellige kreative projekter eller at se en fodboldkamp i fjernsynet. Fælles for det meste af det, jeg interesserer mig for, er, at jeg godt kan lide at skabe noget fra bunden og nørde detaljerne undervejs.
+                </p>
+                <p>
+                  Som person er jeg ydmyg, jordnær og nem at arbejde sammen med. Jeg tager mit arbejde seriøst og stiller gerne spørgsmål, hvis det kan føre til en bedre løsning. Samtidig tror jeg på, at godt samarbejde og en god omgangstone er mindst lige så vigtigt som de tekniske kompetencer.
                 </p>
               </div>
             </div>
@@ -129,7 +137,7 @@ export default function About() {
       </section>
 
       <section className="py-32 bg-brand-sand-light overflow-hidden">
-        <div className="container mx-auto px-6 max-w-5xl">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="space-y-24">
             
             {/* Main Content - Full Width */}
@@ -161,13 +169,15 @@ export default function About() {
                         </div>
                         <span className="shrink-0 text-sm font-medium bg-brand-sand/50 px-3 py-1 rounded-full text-dark-700">{exp.period}</span>
                       </div>
-                      <ul className="space-y-2 mt-4">
-                        {exp.tasks.map((task, i) => (
-                          <li key={i} className="text-dark-700 font-light text-sm relative pl-4 before:absolute before:left-0 before:text-brand-green before:content-['•']">
-                            {task}
-                          </li>
-                        ))}
-                      </ul>
+                      {exp.tasks.length > 0 && (
+                        <ul className="space-y-2 mt-4">
+                          {exp.tasks.map((task, i) => (
+                            <li key={i} className="text-dark-700 font-light text-sm relative pl-4 before:absolute before:left-0 before:text-brand-green before:content-['•']">
+                              {task}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -180,7 +190,7 @@ export default function About() {
 
     {/* Uddannelse */}
       <section className="py-24 bg-brand-sand overflow-hidden">
-        <div className="container mx-auto px-6 max-w-5xl">
+        <div className="container mx-auto px-6 max-w-7xl">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -224,7 +234,7 @@ export default function About() {
       </section>
 
       <section className="py-24 bg-brand-sand-light overflow-hidden">
-        <div className="container mx-auto px-6 max-w-5xl">
+        <div className="container mx-auto px-6 max-w-7xl">
           {/* Bottom Grid Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             
@@ -314,7 +324,7 @@ export default function About() {
 
     {/* Contact CTA */}
     <section className="py-24 bg-brand-sand overflow-hidden relative">
-      <div className="container mx-auto px-6 max-w-5xl relative z-10 text-center">
+      <div className="container mx-auto px-6 max-w-7xl relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

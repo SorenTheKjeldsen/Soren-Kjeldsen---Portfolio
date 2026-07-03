@@ -43,13 +43,20 @@ export default function Projects() {
                   className="w-full lg:w-[60%] relative group"
                 >
                   <Link to={`/projekt/${project.id}`}>
-                    <div className="relative z-10 overflow-hidden aspect-[4/3] lg:aspect-[16/10] bg-white shadow-sm cursor-pointer rounded-2xl">
+                    <div className="relative z-10 overflow-hidden aspect-[4/3] lg:aspect-[16/10] bg-white shadow-sm cursor-pointer rounded-2xl group-hover:shadow-md transition-shadow">
                       <img 
                         src={project.image} 
                         alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        className={`w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${project.id === 'lokesvej' ? 'blur-[4px] brightness-75 scale-110 group-hover:scale-110' : ''}`}
                       />
                       <div className="absolute inset-0 bg-brand-sand/10 mix-blend-overlay border border-black/5" />
+                      {project.id === 'lokesvej' && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-dark-900/30">
+                          <span className="text-white text-lg md:text-2xl lg:text-3xl font-serif tracking-widest uppercase border border-white/40 px-6 py-3 md:px-8 md:py-4 rounded-sm backdrop-blur-md drop-shadow-md">
+                            Kommer snart
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </Link>
                   
@@ -136,8 +143,8 @@ export default function Projects() {
               >
                 {item.image ? (
                   <div className="w-full flex flex-col h-full">
-                    <div className="relative h-48 w-full overflow-hidden shrink-0 bg-brand-sand">
-                      <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="relative h-64 w-full overflow-hidden shrink-0 bg-brand-sand">
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
                     </div>
                     <div className="p-6 flex flex-col items-center text-center flex-grow">
                       <h3 className="font-serif text-xl tracking-widest text-dark-900 uppercase mb-2">{item.title}</h3>

@@ -92,8 +92,15 @@ export default function ProjectDetails() {
           <img 
             src={project.image} 
             alt={project.title} 
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            className={`w-full h-full object-cover transition-transform duration-700 ${project.id === 'lokesvej' ? 'blur-[4px] brightness-75 scale-105 group-hover:scale-105' : 'group-hover:scale-105'}`}
           />
+          {project.id === 'lokesvej' && (
+            <div className="absolute inset-0 flex items-center justify-center bg-dark-900/30">
+              <span className="text-white text-xl md:text-3xl lg:text-4xl font-serif tracking-widest uppercase border border-white/40 px-8 py-4 rounded-sm backdrop-blur-md drop-shadow-md">
+                Kommer snart
+              </span>
+            </div>
+          )}
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-24">
@@ -257,9 +264,16 @@ export default function ProjectDetails() {
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               src={flatImages[fullscreenImageIndex].src} 
               alt={flatImages[fullscreenImageIndex].title || "Fullscreen view"} 
-              className="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm"
+              className={`max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm ${project.id === 'lokesvej' && fullscreenImageIndex === 0 ? 'blur-[4px] brightness-75 scale-105' : ''}`}
               onClick={(e) => e.stopPropagation()}
             />
+            {project.id === 'lokesvej' && fullscreenImageIndex === 0 && (
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[120]">
+                <span className="text-white text-xl md:text-3xl lg:text-4xl font-serif tracking-widest uppercase border border-white/40 px-8 py-4 rounded-sm backdrop-blur-md bg-dark-900/30 drop-shadow-md">
+                  Kommer snart
+                </span>
+              </div>
+            )}
             {flatImages[fullscreenImageIndex].title && (
               <div className="absolute bottom-10 left-0 right-0 text-center text-white/80 tracking-[0.2em] uppercase text-sm font-medium" onClick={(e) => e.stopPropagation()}>
                 {flatImages[fullscreenImageIndex].title}

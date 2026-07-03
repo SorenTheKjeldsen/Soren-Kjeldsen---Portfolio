@@ -1,4 +1,4 @@
-const commercialImage = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop';
+import lokesvejImage from '../assets/images/lokesvej_placeholder_1783055982053.jpg';
 import halgaardImage from '../assets/images/HDI_Forside.jpg';
 import hdi01 from '../assets/images/01_HDI_Situationsplan.jpg';
 import hdi02 from '../assets/images/02_HDI_Stueplan.jpg';
@@ -104,7 +104,7 @@ export const projects = [
       'Ejendommen beliggende på Lokesvej i Aarhus, indgår som en integreret del af den eksisterende bystruktur i området. Projektet består af 7 almene familieboliger med et samlet boligareal på 685 m² samt 2 store erhvervslejemål med et samlet areal på 181 m². De almene boliger er disponeret på 1., 2. og 3. sal samt en penthouselejlighed på 4. sal med et areal på 104 m².',
       'Fire af boligerne er indrettet som 3-værelses lejligheder med et areal på 108 m², mens tre boliger er indrettet som 2-værelses lejligheder på hver 85 m². På 4. sal etableres en stor tagterrasse orienteret mod sydvest, som er disponeret til fælles brug for bygningens beboere. Stueetagen indrettes med to store erhvervslejemål, velegnede til café, butik eller lignende publikumsorienterede funktioner. Kælderen indrettes med cykelparkering samt individuelle kælderrum til hvert lejemål.'
     ],
-    image: commercialImage,
+    image: lokesvejImage,
     imageGroups: [
       {
         name: 'Hovedtegninger',
