@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, useNavigationType } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -10,12 +10,17 @@ import ProjectDetails from './components/ProjectDetails';
 
 import VideoSection from './components/VideoSection';
 
+import SplashScreen from './components/SplashScreen';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
+  const action = useNavigationType();
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (action !== 'POP') {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, action]);
 
   return null;
 }
@@ -51,6 +56,7 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <Router>
+      <SplashScreen />
       <ScrollToTop />
       <div className="min-h-screen font-sans">
         <Routes>
