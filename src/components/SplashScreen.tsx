@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLocation } from 'react-router-dom';
 import logoImage from '../assets/images/4K Logo.webp';
 
 export default function SplashScreen() {
-  const [show, setShow] = useState(true);
+  const location = useLocation();
+  const [show, setShow] = useState(location.pathname === '/');
 
   useEffect(() => {
+    if (!show) return;
+    
     // Hide the splash screen after 1.2 seconds
     const timer = setTimeout(() => {
       setShow(false);
     }, 1200);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [show]);
+
+  if (location.pathname !== '/' && show) {
+    setShow(false);
+  }
 
   return (
     <AnimatePresence>
