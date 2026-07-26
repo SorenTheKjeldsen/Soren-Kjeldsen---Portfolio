@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { Resend } from "resend";
 
@@ -69,6 +70,28 @@ async function startServer() {
       appType: "spa",
     });
     app.use(vite.middlewares);
+
+    app.get("*", async (req, res, next) => {
+      const url = req.originalUrl;
+      try {
+        // Read index.html
+        let template = await fs.promises.readFile(
+          path.resolve("index.html"),
+          "utf-8"
+        );
+        
+        // Apply Vite HTML transforms
+        template = await vite.transformIndexHtml(url, template);
+        
+        // Send the transformed HTML
+        res.status(200).set({ "Content-Type": "text/html" }).end(template);
+      } catch (e: any) {
+        // If an error is caught, let Vite fix the stack trace so it maps back
+        // to your actual source code.
+        vite.ssrFixStacktrace(e);
+        next(e);
+      }
+    });
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
