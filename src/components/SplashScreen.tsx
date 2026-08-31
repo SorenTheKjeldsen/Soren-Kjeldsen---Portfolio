@@ -37,7 +37,7 @@ export default function SplashScreen() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 1.05, opacity: 0, y: -10 }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            className="w-48 md:w-64 lg:w-80"
+            className="w-64 md:w-96 lg:w-[32rem]"
           >
             <img 
               src={logoImage} 
