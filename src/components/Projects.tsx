@@ -1,11 +1,19 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { projects } from '../data/projects';
+import { Play, X } from 'lucide-react';
 
 import detGroenneImage from '../assets/images/Det Grønne Enfamiliehus.jpg';
 import detGroennePdf from '../data/Det grønne enfamiliehus - LF 7. Semester.pdf';
+import jjmg9Image from '../assets/images/JJMG9 Forside.jpg';
+import ledelseImage from '../assets/images/Ledelse_og_Kommunikation_Forside.jpg';
+import ledelsePdf from '../data/Ledelse_og_Kommunikation_VUE_4_Semester.pdf';
 
 export default function Projects() {
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+
   return (
     <>
       <section className="pt-32 pb-8 lg:pb-12 bg-brand-sand overflow-hidden">
@@ -122,16 +130,16 @@ export default function Projects() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif text-dark-900 uppercase">Andre Projekter</h2>
-            <p className="mt-4 text-dark-700 font-light max-w-2xl mx-auto text-lg hover:text-brand-green transition-colors cursor-pointer">
-              Sektion under opbygning - flere projekter vil løbende blive tilføjet
+            <h2 className="text-4xl lg:text-5xl font-serif text-dark-900 uppercase">Individuelt Arbejde</h2>
+            <p className="mt-4 text-dark-700 font-light max-w-2xl mx-auto text-lg transition-colors cursor-pointer">
+              Et udvalg af individuelle undersøgelser og rapporter, udarbejdet med et særligt fokus på faglig fordybelse og personlig udvikling inden for branchen.
             </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             {[
-              { id: 1, title: 'Det Grønne Enfamiliehus', subtitle: 'LF Undersøgelse - 7. semester', image: detGroenneImage, pdf: detGroennePdf },
-              { id: 2, title: 'Kommer snart' },
-              { id: 3, title: 'Kommer snart' }
+              { id: 1, title: 'Det Grønne Enfamiliehus', subtitle: 'Lokalt Fagelement Undersøgelse - 7. semester', description: 'Går vi på kompromis med kvaliteten af vores bygninger, når vi skal holde os indenfor de nye bæredygtighedskrav?', image: detGroenneImage, pdf: detGroennePdf, pdfName: 'Det grønne enfamiliehus - LF 7. Semester.pdf', imagePosition: 'object-top' },
+              { id: 2, title: 'VISUALISERING AF RENOVERINGSPROJEKT', subtitle: 'Lokalt Fagelement Undersøgelse - 5. semester', description: 'Jeg vil undersøge, hvordan TwinMotion kan anvendes til at visualisere opsætningen af bygningsdele under en renovering', image: jjmg9Image, video: 'https://www.youtube.com/embed/Wso0tdiaCQ8?si=jJsJH9U0Delv0OIu', imagePosition: 'object-center' },
+              { id: 3, title: 'LEDELSE OG KOMMUNIKATION', subtitle: 'Valgfrit Uddannelseselement - 4. semester', description: 'Med udgangspunkt i to interviews ønsker jeg at undersøge, hvilke problemer der er med ledelse og kommunikation i byggebranchen og hvad vi kan gøre ved dem', image: ledelseImage, pdf: ledelsePdf, pdfName: 'Ledelse & Kommunikation - VUE, 4. Semester.pdf', imagePosition: 'object-[center_35%]' }
             ].map((item, idx) => (
               <motion.div
                 key={item.id}
@@ -142,17 +150,35 @@ export default function Projects() {
                 className={`bg-white/50 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm flex flex-col items-center hover:bg-white/80 transition-colors overflow-hidden relative ${item.image ? 'p-0 group h-auto' : 'p-8 justify-center h-full min-h-[16rem]'}`}
               >
                 {item.image ? (
-                  <div className="w-full flex flex-col h-full">
-                    <div className="relative h-64 w-full overflow-hidden shrink-0 bg-brand-sand">
-                      <img src={item.image} alt={item.title} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+                   <div className="w-full flex flex-col h-full">
+                    <div 
+                      className="relative h-64 sm:h-72 w-full overflow-hidden shrink-0 bg-brand-sand cursor-pointer"
+                      onClick={() => setActiveImage(item.image)}
+                    >
+                      <img src={item.image} alt={item.title} className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${item.imagePosition || 'object-top'}`} />
                     </div>
-                    <div className="p-6 flex flex-col items-center text-center flex-grow">
-                      <h3 className="font-serif text-xl tracking-widest text-dark-900 uppercase mb-2">{item.title}</h3>
-                      {item.subtitle && <p className="text-dark-700 text-sm mb-6 font-light">{item.subtitle}</p>}
+                    <div className="p-6 flex flex-col items-center text-center flex-grow w-full">
+                      <div className="min-h-[56px] flex items-center justify-center w-full mb-2">
+                        <h3 className="font-serif text-xl tracking-widest text-dark-900 uppercase text-center flex items-center justify-center gap-1.5 flex-wrap">
+                          {item.title}
+                        </h3>
+                      </div>
+                      <div className="min-h-[40px] flex items-center justify-center mb-3">
+                        {item.subtitle && <p className="text-brand-green text-xs font-medium uppercase tracking-widest leading-relaxed">{item.subtitle}</p>}
+                      </div>
+                      <div className="flex-grow flex flex-col items-center w-full">
+                        {item.description && <p className="text-dark-700 text-sm mb-6 font-light">{item.description}</p>}
+                      </div>
+                      
                       {item.pdf && (
-                        <a href={item.pdf} download className="mt-auto bg-brand-sand text-dark-900 border border-black/10 hover:bg-brand-green hover:border-brand-green hover:text-white px-6 py-2.5 rounded-full text-xs font-medium transition-all duration-300 uppercase tracking-widest inline-flex items-center justify-center gap-2">
-                          Download Projekt
+                        <a href={item.pdf} download={item.pdfName || true} className="mt-auto bg-brand-sand text-dark-900 border border-black/10 hover:bg-brand-green hover:border-brand-green hover:text-white px-6 py-2.5 rounded-full text-xs font-medium transition-all duration-300 uppercase tracking-widest inline-flex items-center justify-center gap-2 w-full max-w-[200px]">
+                          Download Rapport
                         </a>
+                      )}
+                      {item.video && (
+                        <button onClick={() => setActiveVideo(item.video)} className="mt-auto bg-brand-sand text-dark-900 border border-black/10 hover:bg-brand-green hover:border-brand-green hover:text-white px-6 py-2.5 rounded-full text-xs font-medium transition-all duration-300 uppercase tracking-widest inline-flex items-center justify-center gap-2 w-full max-w-[200px]">
+                          <Play size={14} /> Se Video
+                        </button>
                       )}
                     </div>
                   </div>
@@ -169,6 +195,47 @@ export default function Projects() {
           </div>
         </div>
       </section>
+
+      {/* Video Modal */}
+      {activeVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-12" onClick={() => setActiveVideo(null)}>
+          <button 
+            onClick={() => setActiveVideo(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+          >
+            <X size={32} />
+          </button>
+          <div className="w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+            <iframe 
+              src={`${activeVideo}&autoplay=1`}
+              title="YouTube video player" 
+              className="absolute inset-0 w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerPolicy="strict-origin-when-cross-origin" 
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Image Modal */}
+      {activeImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8" onClick={() => setActiveImage(null)}>
+          <button 
+            onClick={() => setActiveImage(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
+          >
+            <X size={32} />
+          </button>
+          <div className="w-full h-full max-w-6xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={activeImage} 
+              alt="Project full view" 
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
