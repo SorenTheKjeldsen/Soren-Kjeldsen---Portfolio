@@ -1,9 +1,30 @@
-import { motion } from 'motion/react';
-import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart, X, Hammer, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import profileImage from '../assets/images/Billede fra BAKS.png';
+import w1 from '../assets/images/Værksted/VÆRKSTED_1.jpg';
+import w2 from '../assets/images/Værksted/VÆRKSTED_2.jpg';
+import w3 from '../assets/images/Værksted/VÆRKSTED_3.jpg';
+import w4 from '../assets/images/Værksted/VÆRKSTED_4.jpg';
+import w5 from '../assets/images/Værksted/VÆRKSTED_5.jpg';
+import w6 from '../assets/images/Værksted/VÆRKSTED_6.png';
+import w7 from '../assets/images/Værksted/VÆRKSTED_7.png';
+import w8 from '../assets/images/Værksted/VÆRKSTED_8.png';
+import w9 from '../assets/images/Værksted/VÆRKSTED_9.jpg';
+import w10 from '../assets/images/Værksted/VÆRKSTED_10.png';
+import w11 from '../assets/images/Værksted/VÆRKSTED_11.jpg';
+import w12 from '../assets/images/Værksted/VÆRKSTED_12.png';
+import w13 from '../assets/images/Værksted/VÆRKSTED_13.jpg';
+import w14 from '../assets/images/Værksted/VÆRKSTED_14.jpg';
+import w15 from '../assets/images/Værksted/VÆRKSTED_15.jpg';
 
 export default function About() {
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+
+  const workshopImages: string[] = [
+    w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15
+  ];
   const experiences = [
     {
       company: 'Vang Arkitekter, 8000 Aarhus C',
@@ -189,7 +210,7 @@ export default function About() {
     </section>
 
     {/* Uddannelse */}
-      <section className="py-24 bg-brand-sand overflow-hidden">
+      <section className="py-24 bg-brand-sand-light overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
@@ -233,8 +254,19 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-24 bg-brand-sand-light overflow-hidden">
+      <section className="py-24 bg-brand-sand overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase flex items-center justify-center gap-3 mb-4">
+              <Star size={20} strokeWidth={1.5} /> Profil
+            </span>
+            <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Kompetencer & Interesser</h2>
+          </motion.div>
           {/* Bottom Grid Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             
@@ -322,6 +354,49 @@ export default function About() {
         </div>
     </section>
 
+    {/* Værkstedsarbejde */}
+    <section className="py-24 bg-brand-sand-light overflow-hidden">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase flex items-center justify-center gap-3 mb-4">
+            <Hammer size={20} strokeWidth={1.5} /> Det Praktiske
+          </span>
+          <h2 className="text-4xl lg:text-5xl font-serif text-dark-900 uppercase tracking-wider mb-6">
+            Projekter fra Værkstedet
+          </h2>
+          <p className="text-dark-700 font-light max-w-2xl mx-auto">
+            Ved siden af mit virke som bygningskonstruktør nyder jeg at bruge mine hænder og min baggrund som tømrer. Her er et lille indblik i nogle af de møbler og småprojekter, jeg har bygget i værkstedet – fra skærebrætter og knagerækker til større møbler.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {workshopImages.map((src, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              onClick={() => setActiveImage(src)}
+              className="group relative aspect-square overflow-hidden bg-dark-800 cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow"
+            >
+              <img
+                src={src}
+                alt={`Værkstedsarbejde ${idx + 1}`}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+
     {/* Contact CTA */}
     <section className="py-24 bg-brand-sand overflow-hidden relative">
       <div className="container mx-auto px-6 max-w-7xl relative z-10 text-center">
@@ -348,6 +423,36 @@ export default function About() {
         </motion.div>
       </div>
     </section>
+
+    <AnimatePresence>
+      {activeImage && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setActiveImage(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 md:p-12 cursor-zoom-out"
+        >
+          <button
+            onClick={() => setActiveImage(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-50"
+          >
+            <X size={32} strokeWidth={1.5} />
+          </button>
+          <motion.img
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            src={activeImage}
+            alt="Forstørret billede"
+            className="w-full h-full object-contain cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+
     </>
   );
 }

@@ -1,6 +1,6 @@
 {
   "name": "Bygningskonstruktør Portfolio",
-  "description": "En eksklusiv portfolio for en bygningskonstruktør, inspireret af luksuriøs ejendomsudvikling, med fremvisning af 3 udvalgte byggeprojekter.",
+  "description": "Mit navn er Søren Kjeldsen – velkommen til min hjemmeside og portfolio. Jeg er uddannet bygningskonstruktør med en baggrund som tømrer og brænder for at skabe gennemtænkte, funktionelle og bygbarre løsninger.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -18,8 +18,8 @@ export default function ProjectDetails() {
         g.images.forEach(img => images.push({ src: img.src, title: img.title }));
       });
     }
-    if (project.images) {
-      project.images.forEach(img => images.push({ src: img }));
+    if ((project as any).images) {
+      (project as any).images.forEach(img => images.push({ src: img }));
     }
     return images;
   }, [project]);
@@ -141,7 +141,7 @@ export default function ProjectDetails() {
         </div>
       </div>
 
-      {((project.imageGroups && project.imageGroups.length > 0) || (project.images && project.images.length > 0)) && (
+      {((project.imageGroups && project.imageGroups.length > 0) || ((project as any).images && (project as any).images.length > 0)) && (
         <div className="bg-brand-sand-light py-24 border-t border-black/5">
           <div className="container mx-auto px-6 max-w-7xl">
             {project.imageGroups && project.imageGroups.length > 0 && (
@@ -183,9 +183,9 @@ export default function ProjectDetails() {
               </div>
             )}
 
-            {project.images && project.images.length > 0 && (
+            {(project as any).images && (project as any).images.length > 0 && (
               <div className="space-y-12 mt-24">
-                {project.images.map((img, idx) => (
+                {(project as any).images.map((img, idx) => (
                   <motion.div 
                     key={idx}
                     initial={{ opacity: 0, scale: 0.98 }}

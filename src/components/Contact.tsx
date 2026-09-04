@@ -17,7 +17,7 @@ export default function Contact() {
     setError('');
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/sk@soerenkjeldsen.dk', {
+      const response = await fetch('https://formsubmit.co/ajax/soren.kjeldsen@hotmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -176,7 +176,7 @@ export default function Contact() {
                </div>
                <div className="group flex justify-center items-center gap-1.5 sm:gap-2 bg-white/30 border border-black/5 hover:bg-white/50 hover:border-brand-green text-dark-900 px-3 sm:px-4 py-2 rounded-full transition-all duration-300 font-sans font-medium text-[10px] sm:text-xs">
                  <Mail size={14} className="text-dark-600 group-hover:text-brand-green transition-colors shrink-0" />
-                 sk@soerenkjeldsen.dk
+                 soren.kjeldsen@hotmail.com
                </div>
                <a href="https://www.linkedin.com/in/soerenkjeldsen/" target="_blank" rel="noopener noreferrer" className="group flex justify-center items-center bg-white/30 border border-black/5 hover:bg-white/50 hover:border-brand-green px-3 sm:px-4 rounded-full transition-all duration-300 shrink-0 overflow-hidden">
                  <img src={linkedinLogo} alt="LinkedIn" className="h-[32px] sm:h-[34px] w-auto object-contain" />
