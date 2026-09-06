@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart, X, Hammer, Star } from 'lucide-react';
+import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart, X, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import profileImage from '../assets/images/Billede fra BAKS.png';
 import w1 from '../assets/images/Værksted/VÆRKSTED_1.jpg';
@@ -19,12 +19,95 @@ import w13 from '../assets/images/Værksted/VÆRKSTED_13.jpg';
 import w14 from '../assets/images/Værksted/VÆRKSTED_14.jpg';
 import w15 from '../assets/images/Værksted/VÆRKSTED_15.jpg';
 
+import w18 from '../assets/images/Værksted/VÆRKSTED_18.jpg';
+import w19 from '../assets/images/Værksted/VÆRKSTED_19.jpg';
+import w20 from '../assets/images/Værksted/VÆRKSTED_20.jpg';
+import w21 from '../assets/images/Værksted/VÆRKSTED_21.jpg';
+import svendeproeveImage from '../assets/images/Svendeprøve 4K.webp';
+
 export default function About() {
-  const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    
+    let animationFrameId: number;
+    let isInteracting = false;
+    let interactionTimeout: NodeJS.Timeout;
+    let exactScrollLeft = el.scrollLeft;
+
+    const handleInteraction = () => {
+      isInteracting = true;
+      clearTimeout(interactionTimeout);
+      interactionTimeout = setTimeout(() => {
+        isInteracting = false;
+      }, 100);
+    };
+    
+    el.addEventListener('wheel', handleInteraction, { passive: true });
+    el.addEventListener('touchstart', handleInteraction, { passive: true });
+    el.addEventListener('touchmove', handleInteraction, { passive: true });
+    
+    const handleScroll = () => {
+      if (isInteracting) {
+        exactScrollLeft = el.scrollLeft;
+      }
+    };
+    el.addEventListener('scroll', handleScroll, { passive: true });
+
+    const scroll = () => {
+      if (!isInteracting && el) {
+        exactScrollLeft += 0.5; // Controls the speed of auto-scroll
+        if (exactScrollLeft >= el.scrollWidth / 2) {
+           exactScrollLeft = 0;
+        }
+        el.scrollLeft = exactScrollLeft;
+      }
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+    
+    animationFrameId = requestAnimationFrame(scroll);
+    
+    return () => {
+      el.removeEventListener('wheel', handleInteraction);
+      el.removeEventListener('touchstart', handleInteraction);
+      el.removeEventListener('touchmove', handleInteraction);
+      el.removeEventListener('scroll', handleScroll);
+      clearTimeout(interactionTimeout);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
   const workshopImages: string[] = [
-    w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15
+    w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w18, w19, w20, w21
   ];
+  const handleNext = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (activeImageIndex === null) return;
+    setActiveImageIndex((activeImageIndex + 1) % workshopImages.length);
+  };
+
+  const handlePrev = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (activeImageIndex === null) return;
+    setActiveImageIndex((activeImageIndex - 1 + workshopImages.length) % workshopImages.length);
+  };
+
+  useEffect(() => {
+    if (activeImageIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'Escape') setActiveImageIndex(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeImageIndex, workshopImages.length]);
+
   const experiences = [
     {
       company: 'Vang Arkitekter, 8000 Aarhus C',
@@ -210,7 +293,7 @@ export default function About() {
     </section>
 
     {/* Uddannelse */}
-      <section className="py-24 bg-brand-sand-light overflow-hidden">
+      <section className="py-24 bg-brand-sand overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
@@ -254,7 +337,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-24 bg-brand-sand overflow-hidden">
+      <section className="py-24 bg-brand-sand-light overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -263,9 +346,9 @@ export default function About() {
             className="text-center mb-16"
           >
             <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase flex items-center justify-center gap-3 mb-4">
-              <Star size={20} strokeWidth={1.5} /> Profil
+              <Star size={20} strokeWidth={1.5} /> Personlige
             </span>
-            <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Kompetencer & Interesser</h2>
+            <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Kompetencer og Interesser</h2>
           </motion.div>
           {/* Bottom Grid Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -355,43 +438,41 @@ export default function About() {
     </section>
 
     {/* Værkstedsarbejde */}
-    <section className="py-24 bg-brand-sand-light overflow-hidden">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section className="py-24 bg-dark-900 overflow-hidden">
+      <div className="container mx-auto px-6 max-w-7xl mb-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center"
         >
-          <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase flex items-center justify-center gap-3 mb-4">
-            <Hammer size={20} strokeWidth={1.5} /> Det Praktiske
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-serif text-dark-900 uppercase tracking-wider mb-6">
-            Projekter fra Værkstedet
+          <h2 className="text-4xl lg:text-5xl font-serif text-white uppercase tracking-wider mb-6">
+            Kreative Hobbyprojekter
           </h2>
-          <p className="text-dark-700 font-light max-w-2xl mx-auto">
-            Ved siden af mit virke som bygningskonstruktør nyder jeg at bruge mine hænder og min baggrund som tømrer. Her er et lille indblik i nogle af de møbler og småprojekter, jeg har bygget i værkstedet – fra skærebrætter og knagerækker til større møbler.
+          <p className="text-white/70 font-light max-w-2xl mx-auto leading-relaxed">
+            Her er et udpluk af nogle af de projekter, jeg har lavet i værkstedet. Det er min måde at koble af på og samtidig udfordre min kreativitet gennem håndværk, design og nye idéer.
           </p>
         </motion.div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {workshopImages.map((src, idx) => (
-            <motion.div
+      <div className="relative w-full flex group">
+        <div 
+          ref={scrollRef}
+          className="flex w-full overflow-x-auto scrollbar-hide gap-4 md:gap-6 px-2 md:px-3 pb-8"
+          style={{ scrollBehavior: 'auto', WebkitOverflowScrolling: 'touch' }}
+        >
+          {[...workshopImages, ...workshopImages].map((src, idx) => (
+            <div
               key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              onClick={() => setActiveImage(src)}
-              className="group relative aspect-square overflow-hidden bg-dark-800 cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow"
+              onClick={() => setActiveImageIndex(idx % workshopImages.length)}
+              className="relative w-[280px] md:w-[360px] lg:w-[22vw] shrink-0 aspect-[4/5] overflow-hidden bg-dark-800 cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow"
             >
               <img
                 src={src}
                 alt={`Værkstedsarbejde ${idx + 1}`}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 opacity-80 hover:opacity-100"
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -425,28 +506,44 @@ export default function About() {
     </section>
 
     <AnimatePresence>
-      {activeImage && (
+      {activeImageIndex !== null && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => setActiveImage(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 md:p-12 cursor-zoom-out"
+          onClick={() => setActiveImageIndex(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 md:p-12 cursor-zoom-out"
         >
           <button
-            onClick={() => setActiveImage(null)}
+            onClick={() => setActiveImageIndex(null)}
             className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-50"
           >
             <X size={32} strokeWidth={1.5} />
           </button>
+          
+          <button
+            onClick={handlePrev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 p-2"
+          >
+            <ChevronLeft size={48} strokeWidth={1.5} />
+          </button>
+
+          <button
+            onClick={handleNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 p-2"
+          >
+            <ChevronRight size={48} strokeWidth={1.5} />
+          </button>
+
           <motion.img
+            key={activeImageIndex}
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            src={activeImage}
+            src={workshopImages[activeImageIndex]}
             alt="Forstørret billede"
-            className="w-full h-full object-contain cursor-default"
+            className="w-full h-full max-h-[85vh] object-contain cursor-default"
             onClick={(e) => e.stopPropagation()}
           />
         </motion.div>
