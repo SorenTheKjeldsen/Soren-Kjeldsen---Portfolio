@@ -7,9 +7,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectDetails from './components/ProjectDetails';
-
 import VideoSection from './components/VideoSection';
-
 import SplashScreen from './components/SplashScreen';
 
 function ScrollToTop() {

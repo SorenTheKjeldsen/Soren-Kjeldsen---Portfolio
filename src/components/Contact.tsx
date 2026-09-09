@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoImage from '../assets/images/4K Logo.webp';
 import linkedinLogo from '../assets/images/Linkedin-Logo.png';
+import { RevealText } from './RevealText';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -67,12 +68,18 @@ export default function Contact() {
           >
             <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase block mb-4">Lås Op For Potentialet</span>
             <h2 className="text-4xl md:text-5xl lg:text-[72px] font-serif text-dark-900 leading-tight mb-8 w-full max-w-[800px]">
-              <span className="whitespace-nowrap">Lad os tage en snak</span> <br />
-              <span className="italic text-brand-green-light">over en kop kaffe.</span>
+              <span className="whitespace-nowrap"><RevealText text="Lad os tage en snak" delay={0.2} /></span> <br />
+              <span className="italic text-brand-green-light"><RevealText text="over en kop kaffe." delay={0.5} /></span>
             </h2>
-            <p className="text-dark-800 font-light max-w-[600px] mb-12 leading-relaxed">
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1, duration: 1 }}
+              className="text-dark-800 font-light max-w-[600px] mb-12 leading-relaxed"
+            >
               Jeg hjælper med at skabe gennemtænkte og byggetekniske løsninger. Uanset om det gælder nybyggeri, tilbygninger eller renovering, kan jeg være behjælpelig med projektering, materialevalg, byggetilladelser samt rådgivning gennem hele processen.
-            </p>
+            </motion.p>
 
           </motion.div>
 

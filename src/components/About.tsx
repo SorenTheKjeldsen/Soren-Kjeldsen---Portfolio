@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart, X, Star, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -24,6 +25,8 @@ import w19 from '../assets/images/Værksted/VÆRKSTED_19.jpg';
 import w20 from '../assets/images/Værksted/VÆRKSTED_20.jpg';
 import w21 from '../assets/images/Værksted/VÆRKSTED_21.jpg';
 import svendeproeveImage from '../assets/images/Svendeprøve 4K.webp';
+import { RevealText } from './RevealText';
+import CTA from './CTA';
 
 export default function About() {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
@@ -213,12 +216,19 @@ export default function About() {
                 <span className="text-brand-green tracking-[0.3em] font-medium text-xs lg:text-sm uppercase">Bygningskonstruktør | Tømrer</span>
               </div>
               
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] mb-6 font-normal">
-                Søren <br className="hidden md:block" />
-                <span className="italic text-brand-green-light">Kjeldsen.</span>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] mb-6 font-normal flex flex-wrap gap-x-4">
+                <RevealText text="Søren" delay={0.2} />
+                <span className="italic text-brand-green-light">
+                  <RevealText text="Kjeldsen." delay={0.4} />
+                </span>
               </h1>
               
-              <div className="space-y-4 text-dark-800 font-light leading-relaxed text-justify">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 1 }}
+                className="space-y-4 text-dark-800 font-light leading-relaxed text-justify"
+              >
                 <p>
                   Jeg blev færdiguddannet bygningskonstruktør i januar 2026 og har en særlig interesse for BIM, projektering og koordinering. Jeg kan godt lide, når ting er gennemtænkte, strukturerede og ser professionelle ud – hvad enten det gælder en BIM-model, et tegningssæt eller andet.
                 </p>
@@ -234,7 +244,7 @@ export default function About() {
                 <p>
                   Som person er jeg ydmyg, jordnær og nem at arbejde sammen med. Jeg tager mit arbejde seriøst og stiller gerne spørgsmål, hvis det kan føre til en bedre løsning. Samtidig tror jeg på, at godt samarbejde og en god omgangstone er mindst lige så vigtigt som de tekniske kompetencer.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -262,7 +272,14 @@ export default function About() {
               
               <div className="space-y-8 relative before:absolute before:inset-y-0 before:left-[15px] md:before:left-[27px] before:w-[2px] before:bg-black/10">
                 {experiences.map((exp, idx) => (
-                  <div key={idx} className="relative pl-12 md:pl-20">
+                  <motion.div 
+                    key={idx} 
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: idx * 0.15 }}
+                    className="relative pl-12 md:pl-20"
+                  >
                     <div className="absolute left-[8px] md:left-[20px] top-6 w-4 h-4 bg-brand-green rounded-full shadow-[0_0_0_4px_rgba(255,255,255,0.5)]" />
                     
                     <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-white/60 hover:bg-white/70 transition-colors">
@@ -283,7 +300,7 @@ export default function About() {
                         </ul>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
@@ -309,7 +326,14 @@ export default function About() {
               
               <div className="space-y-8 relative before:absolute before:inset-y-0 before:left-[15px] md:before:left-[27px] before:w-[2px] before:bg-black/10">
                 {educations.map((edu, idx) => (
-                  <div key={idx} className="relative pl-12 md:pl-20">
+                  <motion.div 
+                    key={idx} 
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: idx * 0.15 }}
+                    className="relative pl-12 md:pl-20"
+                  >
                     <div className="absolute left-[8px] md:left-[20px] top-6 w-4 h-4 bg-brand-green rounded-full shadow-[0_0_0_4px_rgba(255,255,255,0.5)] border-2 border-transparent" />
                     
                     <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-white/60 hover:bg-white/70 transition-colors relative">
@@ -330,7 +354,7 @@ export default function About() {
                         <span className="shrink-0 text-sm font-medium bg-brand-sand/50 px-3 py-1 rounded-full text-dark-700">{edu.period}</span>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
@@ -367,9 +391,16 @@ export default function About() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {itSkills.map((skill, idx) => (
-                    <span key={idx} className="px-4 py-2 bg-brand-sand/50 text-dark-700 rounded-lg text-sm tracking-wide border border-white/50">
+                    <motion.span 
+                      key={idx} 
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: idx * 0.05 }}
+                      className="px-4 py-2 bg-brand-sand/50 text-dark-700 rounded-lg text-sm tracking-wide border border-white/50"
+                    >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
@@ -387,9 +418,16 @@ export default function About() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {['Dansk', 'Engelsk'].map((lang, idx) => (
-                    <span key={idx} className="px-4 py-2 bg-brand-sand/50 text-dark-700 rounded-lg text-sm tracking-wide border border-white/50">
+                    <motion.span 
+                      key={idx} 
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: idx * 0.05 }}
+                      className="px-4 py-2 bg-brand-sand/50 text-dark-700 rounded-lg text-sm tracking-wide border border-white/50"
+                    >
                       {lang}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
@@ -409,9 +447,16 @@ export default function About() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {personalSkills.map((skill, idx) => (
-                    <span key={idx} className="px-4 py-2 bg-brand-sand/50 text-dark-700 rounded-lg text-sm tracking-wide border border-white/50">
+                    <motion.span 
+                      key={idx} 
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: idx * 0.05 }}
+                      className="px-4 py-2 bg-brand-sand/50 text-dark-700 rounded-lg text-sm tracking-wide border border-white/50"
+                    >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
@@ -478,32 +523,7 @@ export default function About() {
       </div>
     </section>
 
-    {/* Contact CTA */}
-    <section className="py-24 bg-brand-sand overflow-hidden relative">
-      <div className="container mx-auto px-6 max-w-7xl relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="space-y-8"
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif text-dark-900 uppercase tracking-wider">
-            Lyder det interessant?
-          </h2>
-          <p className="text-lg md:text-xl text-dark-700 font-light max-w-2xl mx-auto">
-            Så kontakt mig og lad os tage en uforpligtende snak om, hvordan vi kan samarbejde.
-          </p>
-          <div className="pt-8">
-            <Link 
-              to="/kontakt" 
-              className="inline-flex items-center justify-center border border-dark-900/10 text-dark-800 px-10 py-5 uppercase tracking-widest text-sm hover:border-brand-green hover:text-brand-green hover:bg-white/50 bg-white/30 transition-all"
-            >
-              KONTAKT MIG
-            </Link>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+    <CTA />
 
     <AnimatePresence>
       {activeImageIndex !== null && (

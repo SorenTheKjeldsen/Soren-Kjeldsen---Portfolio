@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { projects } from '../data/projects';
 import { useEffect, useState, useMemo } from 'react';
+import CTA from './CTA';
 
 export default function ProjectDetails() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ export default function ProjectDetails() {
     
     if (project.imageGroups) {
       project.imageGroups.forEach(g => {
-        g.images.forEach(img => images.push({ src: img.src, title: img.title }));
+        g.images.forEach(img => images.push({ src: img.src, title: (img as any).title || (img as any).caption }));
       });
     }
     if ((project as any).images) {
@@ -157,10 +158,10 @@ export default function ProjectDetails() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.8 }}
-                          className="w-full md:w-1/2 lg:w-1/3 px-4 md:px-6 mb-8 md:mb-12 flex flex-col"
+                          className={`${(group as any).layout === 'two-columns' ? 'w-full md:w-1/2' : 'w-full md:w-1/2 lg:w-1/3'} px-4 md:px-6 mb-8 md:mb-12 flex flex-col`}
                         >
                           <div className="mb-4 flex justify-center">
-                            <span className="text-brand-green tracking-[0.2em] font-medium text-xs uppercase text-center">{imgObj.title}</span>
+                            <span className="text-brand-green tracking-[0.2em] font-medium text-xs uppercase text-center">{(imgObj as any).title || (imgObj as any).caption}</span>
                           </div>
                           <div 
                             className="w-full bg-brand-sand/50 relative overflow-hidden rounded-xl cursor-pointer group shadow-sm flex-1"
@@ -171,7 +172,7 @@ export default function ProjectDetails() {
                           >
                             <img 
                               src={imgObj.src} 
-                              alt={`${project.title} - ${imgObj.title}`} 
+                              alt={`${project.title} - ${(imgObj as any).title || (imgObj as any).caption}`} 
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                             />
                           </div>
@@ -210,6 +211,8 @@ export default function ProjectDetails() {
           </div>
         </div>
       )}
+
+      <CTA />
 
       <AnimatePresence>
         {fullscreenImageIndex !== null && flatImages[fullscreenImageIndex] && (

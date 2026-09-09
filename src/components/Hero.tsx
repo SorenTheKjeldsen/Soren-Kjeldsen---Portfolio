@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import portraitImage from '../assets/images/Billede fra BAKS.png';
+import { RevealText } from './RevealText';
 
 export default function Hero() {
   return (
@@ -20,15 +21,22 @@ export default function Hero() {
               <span className="text-brand-green tracking-[0.3em] font-medium text-xs lg:text-sm uppercase">Bygningskonstruktør | Tømrer</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] font-normal">
-              Søren <br />
-              <span className="italic text-brand-green-light">Kjeldsen.</span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] font-normal my-8">
+              <RevealText text="Søren" delay={0.2} /> <br />
+              <span className="italic text-brand-green-light">
+                <RevealText text="Kjeldsen." delay={0.4} />
+              </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-500 max-w-xl font-light leading-relaxed">
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 1 }}
+              className="text-lg md:text-xl text-gray-500 max-w-xl font-light leading-relaxed"
+            >
               Udadvendt og engageret bygningskonstruktør med håndværkerbaggrund og projektering i fingerspidserne. <br />
               Jeg bygger bro mellem kompleks byggeteknik og praktisk udførelse.
-            </p>
+            </motion.p>
             
             <div className="flex flex-col sm:flex-row gap-6">
               <Link 

@@ -6,9 +6,10 @@ import { Play, X } from 'lucide-react';
 
 import detGroenneImage from '../assets/images/Det Grønne Enfamiliehus.jpg';
 import detGroennePdf from '../data/Det grønne enfamiliehus - LF 7. Semester.pdf';
-import jjmg9Image from '../assets/images/JJMG9 Forside.jpg';
+import jjmg9Image from '../assets/images/JJMG9/JJMG9 Forside.jpg';
 import ledelseImage from '../assets/images/Ledelse_og_Kommunikation_Forside.jpg';
 import ledelsePdf from '../data/Ledelse_og_Kommunikation_VUE_4_Semester.pdf';
+import CTA from './CTA';
 
 export default function Projects() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
@@ -51,7 +52,7 @@ export default function Projects() {
                   className="w-full lg:w-[60%] relative group"
                 >
                   <Link to={`/projekt/${project.id}`}>
-                    <div className="relative z-10 overflow-hidden aspect-[4/3] lg:aspect-[16/10] bg-white shadow-sm cursor-pointer rounded-2xl group-hover:shadow-md transition-shadow">
+                    <div className="relative z-10 overflow-hidden aspect-[4/3] lg:aspect-[16/10] bg-white shadow-sm cursor-pointer rounded-2xl hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300">
                       <img 
                         src={project.image} 
                         alt={project.title} 
@@ -147,7 +148,7 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: item.id * 0.1 }}
-                className={`bg-white/50 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm flex flex-col items-center hover:bg-white/80 transition-colors overflow-hidden relative ${item.image ? 'p-0 group h-auto' : 'p-8 justify-center h-full min-h-[16rem]'}`}
+                className={`bg-white/50 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm flex flex-col items-center hover:bg-white/90 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 overflow-hidden relative ${item.image ? 'p-0 group h-auto' : 'p-8 justify-center h-full min-h-[16rem]'}`}
               >
                 {item.image ? (
                    <div className="w-full flex flex-col h-full">
@@ -195,6 +196,8 @@ export default function Projects() {
           </div>
         </div>
       </section>
+
+      <CTA />
 
       {/* Video Modal */}
       {activeVideo && (

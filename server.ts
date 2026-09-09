@@ -1,12 +1,12 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
-import { createServer as createViteServer } from "vite";
 import { Resend } from "resend";
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  // Use DEFAULT_APP_PORT for AI Studio, and PORT for Cloud Run
+  const PORT = parseInt(process.env.DEFAULT_APP_PORT || process.env.PORT || "3000");
 
   app.use(express.json());
 
@@ -65,6 +65,7 @@ async function startServer() {
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
