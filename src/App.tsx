@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, useNavigationType } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -26,13 +27,30 @@ function ScrollToTop() {
 function Layout() {
   const location = useLocation();
   const hideContact = location.pathname !== '/' && location.pathname !== '/kontakt';
+  const [contentReady, setContentReady] = useState(location.pathname !== '/');
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setContentReady(true);
+      return;
+    }
+    const handleLogoSettled = () => setContentReady(true);
+    window.addEventListener('logo_settled', handleLogoSettled);
+    return () => window.removeEventListener('logo_settled', handleLogoSettled);
+  }, [location.pathname]);
 
   return (
     <>
       <Header />
-      <Outlet />
-      {!hideContact && <Contact />}
-      <Footer />
+      <motion.div
+        initial={{ opacity: location.pathname === '/' ? 0 : 1 }}
+        animate={{ opacity: contentReady ? 1 : 0 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      >
+        <Outlet />
+        {!hideContact && <Contact />}
+        <Footer />
+      </motion.div>
     </>
   );
 }
@@ -56,7 +74,7 @@ export default function App() {
     <Router>
       <SplashScreen />
       <ScrollToTop />
-      <div className="min-h-screen font-sans">
+      <div className="min-h-screen font-sans bg-brand-sand">
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />

@@ -10,6 +10,19 @@ export default function Header() {
   const [headerBgClass, setHeaderBgClass] = useState('bg-brand-sand/95');
   const [isOverDarkSection, setIsOverDarkSection] = useState(false);
   const location = useLocation();
+  const [isSplashActive, setIsSplashActive] = useState(location.pathname === '/');
+  const [logoSettled, setLogoSettled] = useState(location.pathname !== '/');
+
+  useEffect(() => {
+    const handleSplashEnd = () => setIsSplashActive(false);
+    const handleLogoSettled = () => setLogoSettled(true);
+    window.addEventListener('splash_end', handleSplashEnd);
+    window.addEventListener('logo_settled', handleLogoSettled);
+    return () => {
+      window.removeEventListener('splash_end', handleSplashEnd);
+      window.removeEventListener('logo_settled', handleLogoSettled);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,21 +113,33 @@ export default function Header() {
         }`}
       >
         <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 relative z-50">
-            <img 
-              src={logoImage} 
-              alt="Søren Kjeldsen Logo" 
-              className={`h-14 md:h-16 w-auto transition-all duration-500 ${logoFilter}`}
-            />
+          <Link to="/" className="flex items-center gap-2 relative z-50 min-h-[56px] min-w-[56px]">
+            {!isSplashActive && (
+              <motion.div layoutId="main-logo-container" className="flex items-center" transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}>
+                <motion.img 
+                  layoutId="main-logo-img"
+                  src={logoImage} 
+                  alt="Søren Kjeldsen Logo" 
+                  className={`h-14 md:h-16 w-auto transition-[filter] duration-500 ${logoFilter}`}
+                  transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+                />
+              </motion.div>
+            )}
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-10">
+          <motion.nav 
+            initial={{ opacity: location.pathname === '/' ? 0 : 1 }}
+            animate={{ opacity: logoSettled ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="hidden md:flex items-center gap-10"
+          >
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href || (link.href === '/projekter' && location.pathname.startsWith('/projekt/'));
               const linkColorClass = isActive 
                 ? (isTransparentOnDark ? 'text-white font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]' : 'text-brand-green font-semibold') 
                 : (isTransparentOnDark ? 'text-white hover:text-brand-green drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]' : 'text-gray-600 hover:text-brand-green');
+
               return link.name === 'PROJEKTER' ? (
                 <div key={link.name} className="relative group">
                   <Link
@@ -150,15 +175,18 @@ export default function Header() {
                 </Link>
               );
             })}
-          </nav>
+          </motion.nav>
 
           {/* Mobile Toggle */}
-          <button
+          <motion.button
+            initial={{ opacity: location.pathname === '/' ? 0 : 1 }}
+            animate={{ opacity: logoSettled ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
             className={`md:hidden relative z-50 transition-colors ${isTransparentOnDark ? 'text-white hover:text-white/80' : 'text-gray-600 hover:text-dark-900'}`}
             onClick={() => setIsOpen(true)}
           >
             <Menu size={28} strokeWidth={1.5} />
-          </button>
+          </motion.button>
         </div>
       </header>
 

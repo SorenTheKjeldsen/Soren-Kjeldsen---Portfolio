@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart, X, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart, X, Star, ChevronLeft, ChevronRight, PencilRuler, Hammer, Shield, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import profileImage from '../assets/images/Billede fra BAKS.png';
 import w1 from '../assets/images/Værksted/VÆRKSTED_1.jpg';
@@ -27,6 +27,31 @@ import w21 from '../assets/images/Værksted/VÆRKSTED_21.jpg';
 import svendeproeveImage from '../assets/images/Svendeprøve 4K.webp';
 import { RevealText } from './RevealText';
 import CTA from './CTA';
+
+const ArchitectureIcon = ({ size = 24, className = "", strokeWidth = 1.5, ...props }: any) => {
+  const adjustedSize = Number(size) * 1.35;
+  return (
+    <svg width={adjustedSize} height={adjustedSize} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+      <path d="M4 6c0-1.1.9-2 2-2h8.5" />
+      <path d="M4 6v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-5" />
+      <path d="M8 12l4-3 4 3v5H8v-5z" />
+      <path d="M20.5 4.5a2.12 2.12 0 0 0-3 0L12 10l-1 3 3-1 5.5-5.5a2.12 2.12 0 0 0 0-3z" />
+      <path d="M17.5 6.5l3 3" />
+    </svg>
+  );
+};
+
+const MilitaryHelmetIcon = ({ size = 24, className = "", strokeWidth = 1.5, ...props }: any) => {
+  const adjustedSize = Number(size) * 1.45;
+  return (
+    <svg width={adjustedSize} height={adjustedSize} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+      <path d="M4 14.5c0-4.5 3.5-8.5 8-8.5s8 4 8 8.5" />
+      <path d="M2 14.5h20" />
+      <path d="M2 14.5c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2" />
+      <path d="M12 8l1 2.5h2.5l-2 1.5.8 2.5-2-1.5-2 1.5.8-2.5-2-1.5H11z" />
+    </svg>
+  );
+};
 
 export default function About() {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
@@ -115,13 +140,15 @@ export default function About() {
     {
       company: 'Vang Arkitekter, 8000 Aarhus C',
       role: 'Bygningskonstruktør, projekterende',
-      period: '2026 - nu',
+      period: '2026 - 3 mdr.',
+      icon: ArchitectureIcon,
       tasks: []
     },
     {
       company: 'Baks Arkitekter, 8250 Egå',
       role: 'Praktikant, studiemedhjælper',
       period: '2025 - 7 mdr.',
+      icon: ArchitectureIcon,
       tasks: [
         'Bidrog aktivt til projektering og udarbejdelse af tegningsmateriale i samarbejde med arkitekter, konstruktører og ingeniører.',
         'Udviklede Revit Families til implementering i nuværende og kommende projekter.',
@@ -132,6 +159,7 @@ export default function About() {
       company: 'Hustømrerne A/S, 8200 Aarhus N',
       role: 'Tømrersvend',
       period: '2021 - 2022',
+      icon: Hammer,
       tasks: [
         'Udførte en bred vifte af tømrer- og snedkerarbejde på større akkordprojekter.',
         'Deltog i planlægning og koordinering af byggefaser.',
@@ -142,6 +170,7 @@ export default function About() {
       company: 'Forsvaret - Oksbøl Kaserne, 6840 Oksbøl',
       role: 'Værnepligt i hæren',
       period: '2021 - 4 mdr.',
+      icon: MilitaryHelmetIcon,
       tasks: [
         'Arbejdede målrettet i teams med struktur og samarbejde under pres.'
       ]
@@ -150,6 +179,7 @@ export default function About() {
       company: 'Dalsgaard Pavilloner A/S, 7100 Vejle',
       role: 'Tømrersvend',
       period: '2020 - 3 mdr.',
+      icon: Hammer,
       tasks: [
         'Produktion og montage af præfabrikerede træmoduler med fokus på kvalitet, præcision og tidsoptimering.'
       ]
@@ -158,6 +188,7 @@ export default function About() {
       company: 'Bisgaard & Boysen Tømrer og Snedker, 6000 Kolding',
       role: 'Tømrerlærling',
       period: '2016 - 2020',
+      icon: Hammer,
       tasks: [
         'Udførte tømrer- og snedkerarbejde på små og store projekter.',
         'Primært beskæftiget med renoveringsopgaver.',
@@ -171,12 +202,14 @@ export default function About() {
       school: 'VIA University College, 8000 Aarhus C',
       degree: 'Bygningskonstruktør, Projekterende',
       period: '2022 - 2026',
-      badge: 'NYT'
+      badge: 'NYT',
+      icon: BookOpen
     },
     {
       school: 'Hansenberg Teknisk Gymnasium, 6000 Kolding',
       degree: 'Tømreruddannelsen, EUD',
-      period: '2016 - 2020'
+      period: '2016 - 2020',
+      icon: BookOpen
     }
   ];
 
@@ -280,7 +313,9 @@ export default function About() {
                     transition={{ duration: 0.5, delay: idx * 0.15 }}
                     className="relative pl-12 md:pl-20"
                   >
-                    <div className="absolute left-[8px] md:left-[20px] top-6 w-4 h-4 bg-brand-green rounded-full shadow-[0_0_0_4px_rgba(255,255,255,0.5)]" />
+                    <div className="absolute -left-1 md:left-2 top-4 w-10 h-10 bg-brand-sand-light rounded-full border-2 border-brand-green flex items-center justify-center z-10 shadow-sm">
+                      <exp.icon size={20} className="text-brand-green" strokeWidth={1.5} />
+                    </div>
                     
                     <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-white/60 hover:bg-white/70 transition-colors">
                       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
@@ -334,7 +369,9 @@ export default function About() {
                     transition={{ duration: 0.5, delay: idx * 0.15 }}
                     className="relative pl-12 md:pl-20"
                   >
-                    <div className="absolute left-[8px] md:left-[20px] top-6 w-4 h-4 bg-brand-green rounded-full shadow-[0_0_0_4px_rgba(255,255,255,0.5)] border-2 border-transparent" />
+                    <div className="absolute -left-1 md:left-2 top-4 w-10 h-10 bg-brand-sand rounded-full border-2 border-brand-green flex items-center justify-center z-10 shadow-sm">
+                      <edu.icon size={20} className="text-brand-green" strokeWidth={1.5} />
+                    </div>
                     
                     <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-white/60 hover:bg-white/70 transition-colors relative">
                       {edu.badge && (

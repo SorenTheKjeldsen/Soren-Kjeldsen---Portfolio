@@ -8,12 +8,22 @@ export default function SplashScreen() {
   const [show, setShow] = useState(location.pathname === '/');
 
   useEffect(() => {
-    if (!show) return;
+    if (!show) {
+      window.dispatchEvent(new Event('splash_end'));
+      setTimeout(() => {
+        window.dispatchEvent(new Event('logo_settled'));
+      }, 600);
+      return;
+    }
     
-    // Hide the splash screen after 1.2 seconds
+    // Hide the splash screen after 1.5 seconds to allow reading before animation
     const timer = setTimeout(() => {
       setShow(false);
-    }, 1200);
+      window.dispatchEvent(new Event('splash_end'));
+      setTimeout(() => {
+        window.dispatchEvent(new Event('logo_settled'));
+      }, 600);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, [show]);
@@ -26,23 +36,31 @@ export default function SplashScreen() {
     <AnimatePresence>
       {show && (
         <motion.div
-          key="splash-screen"
+          key="splash-screen-bg"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="fixed inset-0 z-[99999] bg-brand-sand flex flex-col items-center justify-center pointer-events-none"
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className="fixed inset-0 z-[99998] bg-brand-sand pointer-events-none"
+        />
+      )}
+      {show && (
+        <motion.div
+          key="splash-screen-logo-wrapper"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center pointer-events-none"
         >
           <motion.div
+            layoutId="main-logo-container"
             initial={{ scale: 0.85, opacity: 0, y: 10 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 1.05, opacity: 0, y: -10 }}
-            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            className="w-64 md:w-96 lg:w-[32rem]"
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+            className="w-64 md:w-96 lg:w-[32rem] relative z-10 flex items-center justify-center"
           >
-            <img 
+            <motion.img 
+              layoutId="main-logo-img"
               src={logoImage} 
               alt="Søren Kjeldsen Logo" 
               className="w-full h-auto drop-shadow-sm" 
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
             />
           </motion.div>
         </motion.div>
