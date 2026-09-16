@@ -114,7 +114,7 @@ export default function Header() {
       >
         <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 relative z-50 min-h-[56px] min-w-[56px]">
-            {!isSplashActive && (
+            {!isSplashActive && !logoSettled && (
               <motion.div layoutId="main-logo-container" className="flex items-center" transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}>
                 <motion.img 
                   layoutId="main-logo-img"
@@ -124,6 +124,15 @@ export default function Header() {
                   transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
                 />
               </motion.div>
+            )}
+            {logoSettled && (
+              <div className="flex items-center">
+                <img 
+                  src={logoImage} 
+                  alt="Søren Kjeldsen Logo" 
+                  className={`h-14 md:h-16 w-auto transition-[filter] duration-500 ${logoFilter}`}
+                />
+              </div>
             )}
           </Link>
 

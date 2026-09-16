@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MonitorDot, Briefcase, UserRound, GraduationCap, Globe, Heart, X, Star, ChevronLeft, ChevronRight, PencilRuler, Hammer, Shield, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import profileImage from '../assets/images/Billede fra BAKS.png';
 import w1 from '../assets/images/Værksted/VÆRKSTED_1.jpg';
 import w2 from '../assets/images/Værksted/VÆRKSTED_2.jpg';
@@ -568,41 +569,60 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => setActiveImageIndex(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 md:p-12 cursor-zoom-out"
+          onClick={(e) => { e.stopPropagation(); setActiveImageIndex(null); }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-12 cursor-zoom-out"
         >
           <button
-            onClick={() => setActiveImageIndex(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-50"
+            onClick={(e) => { e.stopPropagation(); setActiveImageIndex(null); }}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-[110]"
           >
             <X size={32} strokeWidth={1.5} />
           </button>
           
           <button
-            onClick={handlePrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 p-2"
+            onClick={(e) => { e.stopPropagation(); handlePrev(e); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-[110] p-2"
           >
             <ChevronLeft size={48} strokeWidth={1.5} />
           </button>
 
           <button
-            onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50 p-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNext(e);
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-[110] p-2"
           >
             <ChevronRight size={48} strokeWidth={1.5} />
           </button>
 
-          <motion.img
+          <motion.div
             key={activeImageIndex}
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            src={workshopImages[activeImageIndex]}
-            alt="Forstørret billede"
-            className="w-full h-full max-h-[85vh] object-contain cursor-default"
+            className="w-full h-full flex items-center justify-center relative cursor-auto z-40"
             onClick={(e) => e.stopPropagation()}
-          />
+          >
+            <TransformWrapper 
+              initialScale={1} 
+              minScale={0.5} 
+              maxScale={5}
+              centerOnInit={true}
+              wheel={{ step: 0.15 }} zoomAnimation={{ disabled: false, animationTime: 400 }}
+              pinch={{ disabled: false }}
+              doubleClick={{ disabled: false }}
+            >
+              <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full flex items-center justify-center">
+                <img
+                  src={workshopImages[activeImageIndex]}
+                  alt="Forstørret billede"
+                  className="max-w-full max-h-[85vh] object-contain"
+                />
+              </TransformComponent>
+            </TransformWrapper>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

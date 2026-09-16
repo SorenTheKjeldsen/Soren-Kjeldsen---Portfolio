@@ -21,12 +21,35 @@ export default function Hero() {
               <span className="text-brand-green tracking-[0.3em] font-medium text-xs lg:text-sm uppercase">Bygningskonstruktør | Tømrer</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] font-normal my-8">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-dark-900 leading-[1.1] font-normal mt-8 mb-6">
               <RevealText text="Søren" delay={0.2} /> <br />
               <span className="italic text-brand-green-light">
                 <RevealText text="Kjeldsen." delay={0.4} />
               </span>
             </h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 1 }}
+              className="mb-8"
+            >
+              <motion.div
+                animate={{ 
+                  y: [0, -8, 0],
+                  opacity: [0.85, 1, 0.85]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                className="inline-flex items-center gap-2 bg-brand-green/10 text-brand-green px-4 py-2 rounded-full border border-brand-green/20 shadow-[0_0_15px_rgba(30,64,51,0.1)]"
+              >
+                <div className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+                <span className="text-xs font-bold tracking-[0.2em] uppercase">Jobsøgende</span>
+              </motion.div>
+            </motion.div>
             
             <motion.p 
               initial={{ opacity: 0 }}

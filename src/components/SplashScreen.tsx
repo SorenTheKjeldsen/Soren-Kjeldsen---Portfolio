@@ -12,7 +12,7 @@ export default function SplashScreen() {
       window.dispatchEvent(new Event('splash_end'));
       setTimeout(() => {
         window.dispatchEvent(new Event('logo_settled'));
-      }, 600);
+      }, 1250);
       return;
     }
     
@@ -22,7 +22,7 @@ export default function SplashScreen() {
       window.dispatchEvent(new Event('splash_end'));
       setTimeout(() => {
         window.dispatchEvent(new Event('logo_settled'));
-      }, 600);
+      }, 1250);
     }, 1500);
 
     return () => clearTimeout(timer);

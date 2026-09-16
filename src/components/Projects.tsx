@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { projects } from '../data/projects';
 import { Play, X } from 'lucide-react';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 import detGroenneImage from '../assets/images/Det Grønne Enfamiliehus.jpg';
 import detGroennePdf from '../data/Det grønne enfamiliehus - LF 7. Semester.pdf';
@@ -223,19 +224,34 @@ export default function Projects() {
 
       {/* Image Modal */}
       {activeImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8" onClick={() => setActiveImage(null)}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8 cursor-zoom-out" onClick={() => setActiveImage(null)}>
           <button 
-            onClick={() => setActiveImage(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveImage(null);
+            }}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-[110]"
           >
             <X size={32} />
           </button>
-          <div className="w-full h-full max-w-6xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            <img 
-              src={activeImage} 
-              alt="Project full view" 
-              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-            />
+          <div className="w-full h-full max-w-6xl flex items-center justify-center relative cursor-auto" onClick={(e) => e.stopPropagation()}>
+            <TransformWrapper 
+              initialScale={1} 
+              minScale={0.5} 
+              maxScale={5}
+              centerOnInit={true}
+              wheel={{ step: 0.15 }} zoomAnimation={{ disabled: false, animationTime: 400 }}
+              pinch={{ disabled: false }}
+              doubleClick={{ disabled: false }}
+            >
+              <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full flex items-center justify-center">
+                <img 
+                  src={activeImage} 
+                  alt="Project full view" 
+                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                />
+              </TransformComponent>
+            </TransformWrapper>
           </div>
         </div>
       )}

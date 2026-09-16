@@ -4,6 +4,7 @@ import { ArrowLeft, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { projects } from '../data/projects';
 import { useEffect, useState, useMemo } from 'react';
 import CTA from './CTA';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 export default function ProjectDetails() {
   const { id } = useParams();
@@ -259,17 +260,33 @@ export default function ProjectDetails() {
               </button>
             )}
 
-            <motion.img 
+            <motion.div
               key={flatImages[fullscreenImageIndex].src}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              src={flatImages[fullscreenImageIndex].src} 
-              alt={flatImages[fullscreenImageIndex].title || "Fullscreen view"} 
-              className={`max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm ${project.id === 'lokesvej' && fullscreenImageIndex === 0 ? 'blur-[4px] brightness-75 scale-105' : ''}`}
+              className="w-full h-full flex items-center justify-center relative cursor-auto"
               onClick={(e) => e.stopPropagation()}
-            />
+            >
+              <TransformWrapper 
+                initialScale={1} 
+                minScale={0.5} 
+                maxScale={5}
+                centerOnInit={true}
+                wheel={{ step: 0.15 }} zoomAnimation={{ disabled: false, animationTime: 400 }}
+                pinch={{ disabled: false }}
+                doubleClick={{ disabled: false }}
+              >
+                <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full flex items-center justify-center">
+                  <img 
+                    src={flatImages[fullscreenImageIndex].src} 
+                    alt={flatImages[fullscreenImageIndex].title || "Fullscreen view"} 
+                    className={`max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm ${project.id === 'lokesvej' && fullscreenImageIndex === 0 ? 'blur-[4px] brightness-75 scale-105' : ''}`}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+            </motion.div>
             {project.id === 'lokesvej' && fullscreenImageIndex === 0 && (
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[120]">
                 <span className="text-white text-xl md:text-3xl lg:text-4xl font-serif tracking-widest uppercase border border-white/40 px-8 py-4 rounded-sm backdrop-blur-md bg-dark-900/30 drop-shadow-md">
