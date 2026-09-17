@@ -143,7 +143,10 @@ export default function About() {
       role: 'Bygningskonstruktør, projekterende',
       period: '2026 - 3 mdr.',
       icon: ArchitectureIcon,
-      tasks: []
+      tasks: [
+        'Bidrog til projektering og udarbejdelse af tegningsmateriale',
+        'Deltog i projekterings- og koordineringsmøder med entreprenører og ingeniører'
+      ]
     },
     {
       company: 'Baks Arkitekter, 8250 Egå',
@@ -607,10 +610,10 @@ export default function About() {
           >
             <TransformWrapper 
               initialScale={1} 
-              minScale={0.5} 
+              minScale={1} 
               maxScale={5}
               centerOnInit={true}
-              wheel={{ step: 0.15 }} zoomAnimation={{ disabled: false, animationTime: 400 }}
+              wheel={{ step: 0.1 }} zoomAnimation={{ disabled: false, animationTime: 400 }}
               pinch={{ disabled: false }}
               doubleClick={{ disabled: false }}
             >

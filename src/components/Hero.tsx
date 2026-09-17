@@ -55,10 +55,10 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 1 }}
-              className="text-lg md:text-xl text-gray-500 max-w-xl font-light leading-relaxed"
+              className="text-lg md:text-xl text-dark-800 max-w-xl font-light leading-relaxed mb-8"
             >
-              Udadvendt og engageret bygningskonstruktør med håndværkerbaggrund og projektering i fingerspidserne. <br />
-              Jeg bygger bro mellem kompleks byggeteknik og praktisk udførelse.
+              Bygningskonstruktør med håndværkerbaggrund. <br className="hidden md:block" />
+              Jeg bygger bro mellem projektering og praktisk udførelse.
             </motion.p>
             
             <div className="flex flex-col sm:flex-row gap-6">

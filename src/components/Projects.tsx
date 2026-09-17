@@ -18,25 +18,12 @@ export default function Projects() {
 
   return (
     <>
-      <section className="pt-32 pb-8 lg:pb-12 bg-brand-sand overflow-hidden">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-8"
-          >
-            <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase block mb-4">2024 - 2026</span>
-            <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Udvalgte Projekter</h2>
-          </motion.div>
-        </div>
-      </section>
-
       {projects.map((project, index) => {
         const bgColors = ['bg-brand-sand', 'bg-brand-sand-light'];
         const bgColor = bgColors[index % bgColors.length];
         
         return (
-          <section key={project.id} className={`${index === 0 ? 'pt-8 pb-24 lg:pt-12 lg:pb-32' : 'py-24 lg:py-32'} overflow-hidden ${bgColor}`}>
+          <section key={project.id} className={`${index === 0 ? 'pt-16 pb-24 lg:pt-20 lg:pb-32' : 'py-24 lg:py-32'} overflow-hidden ${bgColor}`}>
             <div className="container mx-auto px-6 max-w-7xl">
               <div 
                 className={`flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${
@@ -124,7 +111,7 @@ export default function Projects() {
         );
       })}
 
-      <section className="py-24 lg:py-32 bg-brand-sand-light overflow-hidden">
+      <section className="py-24 lg:py-32 bg-dark-900 overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -132,8 +119,8 @@ export default function Projects() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif text-dark-900 uppercase">Individuelt Arbejde</h2>
-            <p className="mt-4 text-dark-700 font-light max-w-2xl mx-auto text-lg transition-colors cursor-pointer">
+            <h2 className="text-4xl lg:text-5xl font-serif text-white uppercase">Individuelt Arbejde</h2>
+            <p className="mt-4 text-white/70 font-light max-w-2xl mx-auto text-lg transition-colors cursor-pointer">
               Et udvalg af individuelle undersøgelser og rapporter, udarbejdet med et særligt fokus på faglig fordybelse og personlig udvikling inden for branchen.
             </p>
           </motion.div>
@@ -149,36 +136,36 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: item.id * 0.1 }}
-                className={`bg-white/50 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm flex flex-col items-center hover:bg-white/90 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 overflow-hidden relative ${item.image ? 'p-0 group h-auto' : 'p-8 justify-center h-full min-h-[16rem]'}`}
+                className={`bg-dark-800 backdrop-blur-sm rounded-2xl border border-white/10 shadow-sm flex flex-col items-center hover:bg-dark-800/80 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-xl hover:border-brand-green/30 transition-all duration-300 overflow-hidden relative ${item.image ? 'p-0 group h-auto' : 'p-8 justify-center h-full min-h-[16rem]'}`}
               >
                 {item.image ? (
                    <div className="w-full flex flex-col h-full">
                     <div 
-                      className="relative h-64 sm:h-72 w-full overflow-hidden shrink-0 bg-brand-sand cursor-pointer"
+                      className="relative h-64 sm:h-72 w-full overflow-hidden shrink-0 bg-dark-900 cursor-pointer"
                       onClick={() => setActiveImage(item.image)}
                     >
-                      <img src={item.image} alt={item.title} className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${item.imagePosition || 'object-top'}`} />
+                      <img src={item.image} alt={item.title} className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 saturate-50 opacity-90 group-hover:saturate-100 group-hover:opacity-100 ${item.imagePosition || 'object-top'}`} />
                     </div>
                     <div className="p-6 flex flex-col items-center text-center flex-grow w-full">
                       <div className="min-h-[56px] flex items-center justify-center w-full mb-2">
-                        <h3 className="font-serif text-xl tracking-widest text-dark-900 uppercase text-center flex items-center justify-center gap-1.5 flex-wrap">
+                        <h3 className="font-serif text-xl tracking-widest text-white uppercase text-center flex items-center justify-center gap-1.5 flex-wrap">
                           {item.title}
                         </h3>
                       </div>
                       <div className="min-h-[40px] flex items-center justify-center mb-3">
-                        {item.subtitle && <p className="text-brand-green text-xs font-medium uppercase tracking-widest leading-relaxed">{item.subtitle}</p>}
+                        {item.subtitle && <p className="text-[#8ab39b] text-xs font-medium uppercase tracking-widest leading-relaxed">{item.subtitle}</p>}
                       </div>
                       <div className="flex-grow flex flex-col items-center w-full">
-                        {item.description && <p className="text-dark-700 text-sm mb-6 font-light">{item.description}</p>}
+                        {item.description && <p className="text-white/70 text-sm mb-6 font-light">{item.description}</p>}
                       </div>
                       
                       {item.pdf && (
-                        <a href={item.pdf} download={item.pdfName || true} className="mt-auto bg-brand-sand text-dark-900 border border-black/10 hover:bg-brand-green hover:border-brand-green hover:text-white px-6 py-2.5 rounded-full text-xs font-medium transition-all duration-300 uppercase tracking-widest inline-flex items-center justify-center gap-2 w-full max-w-[200px]">
+                        <a href={item.pdf} download={item.pdfName || true} className="mt-auto bg-dark-900 text-white/90 border border-white/10 hover:bg-white hover:text-dark-900 hover:border-white px-6 py-2.5 rounded-full text-xs font-medium transition-all duration-300 uppercase tracking-widest inline-flex items-center justify-center gap-2 w-full max-w-[200px]">
                           Download Rapport
                         </a>
                       )}
                       {item.video && (
-                        <button onClick={() => setActiveVideo(item.video)} className="mt-auto bg-brand-sand text-dark-900 border border-black/10 hover:bg-brand-green hover:border-brand-green hover:text-white px-6 py-2.5 rounded-full text-xs font-medium transition-all duration-300 uppercase tracking-widest inline-flex items-center justify-center gap-2 w-full max-w-[200px]">
+                        <button onClick={() => setActiveVideo(item.video)} className="mt-auto bg-dark-900 text-white/90 border border-white/10 hover:bg-white hover:text-dark-900 hover:border-white px-6 py-2.5 rounded-full text-xs font-medium transition-all duration-300 uppercase tracking-widest inline-flex items-center justify-center gap-2 w-full max-w-[200px]">
                           <Play size={14} /> Se Video
                         </button>
                       )}
@@ -186,10 +173,10 @@ export default function Projects() {
                   </div>
                 ) : (
                   <>
-                    <div className="w-16 h-16 rounded-full bg-brand-sand mb-4 flex items-center justify-center text-brand-green opacity-50">
+                    <div className="w-16 h-16 rounded-full bg-dark-900 mb-4 flex items-center justify-center text-brand-green opacity-50">
                       +
                     </div>
-                    <h3 className="font-serif text-xl text-dark-800 uppercase tracking-widest text-center">{item.title}</h3>
+                    <h3 className="font-serif text-xl text-white uppercase tracking-widest text-center">{item.title}</h3>
                   </>
                 )}
               </motion.div>
@@ -237,10 +224,10 @@ export default function Projects() {
           <div className="w-full h-full max-w-6xl flex items-center justify-center relative cursor-auto" onClick={(e) => e.stopPropagation()}>
             <TransformWrapper 
               initialScale={1} 
-              minScale={0.5} 
+              minScale={1} 
               maxScale={5}
               centerOnInit={true}
-              wheel={{ step: 0.15 }} zoomAnimation={{ disabled: false, animationTime: 400 }}
+              wheel={{ step: 0.1 }} zoomAnimation={{ disabled: false, animationTime: 400 }}
               pinch={{ disabled: false }}
               doubleClick={{ disabled: false }}
             >

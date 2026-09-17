@@ -3,12 +3,14 @@ import { motion } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, useNavigationType } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import JobSearchBanner from './components/JobSearchBanner';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectDetails from './components/ProjectDetails';
 import VideoSection from './components/VideoSection';
+import ProjectIntro from './components/ProjectIntro';
 import SplashScreen from './components/SplashScreen';
 
 function ScrollToTop() {
@@ -59,7 +61,9 @@ function Home() {
   return (
     <main>
       <Hero />
+      <JobSearchBanner />
       <VideoSection />
+      <ProjectIntro />
       <Projects />
     </main>
   );
@@ -81,6 +85,7 @@ export default function App() {
             <Route path="/projekter" element={
               <PageWrapper>
                 <VideoSection />
+                <ProjectIntro />
                 <Projects />
               </PageWrapper>
             } />
