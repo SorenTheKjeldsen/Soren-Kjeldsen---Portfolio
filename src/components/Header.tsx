@@ -167,10 +167,6 @@ export default function Header() {
                         <ChevronRight size={12} className="opacity-70" />
                         J. M. MØRKS GADE
                       </Link>
-                      <Link to="/projekt/lokesvej" className={`flex items-center gap-1 text-[11px] tracking-widest transition-all uppercase ${isTransparentOnDark ? 'hover:text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] hover:translate-x-1' : 'hover:text-brand-green hover:translate-x-1'}`}>
-                        <ChevronRight size={12} className="opacity-70" />
-                        LOKESVEJ
-                      </Link>
                     </div>
                   </div>
                 </div>

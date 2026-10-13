@@ -3,7 +3,6 @@ import { motion } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, useNavigationType } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import JobSearchBanner from './components/JobSearchBanner';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -61,7 +60,6 @@ function Home() {
   return (
     <main>
       <Hero />
-      <JobSearchBanner />
       <VideoSection />
       <ProjectIntro />
       <Projects />
@@ -92,20 +90,10 @@ export default function App() {
             <Route path="/om-mig" element={<PageWrapper><About /></PageWrapper>} />
             <Route path="/projekt/:id" element={<ProjectDetails />} />
           </Route>
-          {/* For kontakt vi don't need double contact, the Layout has Contact as footer */}
+          {/* Kontakt-side med kontaktformular og tilhørende sektion */}
           <Route path="/kontakt" element={
-            <main className="bg-brand-sand min-h-screen">
+            <main className="bg-brand-sand min-h-screen pt-12 md:pt-16">
               <Header />
-              <div className="pt-32 lg:pt-40 pb-0">
-                <div className="container mx-auto px-6 max-w-7xl">
-                  <div className="text-center">
-                    <h2 className="text-4xl lg:text-6xl font-serif text-dark-900 uppercase">Kontakt</h2>
-                    <p className="max-w-2xl mx-auto mt-6 text-dark-800 font-light leading-relaxed">
-                      Har du et spørgsmål, eller vil du høre mere om, hvordan jeg kan bidrage til jeres team? Jeg tager gerne en uforpligtende snak og ser frem til at høre fra dig.
-                    </p>
-                  </div>
-                </div>
-              </div>
               <Contact />
               <Footer />
             </main>

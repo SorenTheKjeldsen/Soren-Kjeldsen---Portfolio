@@ -1,4 +1,3 @@
-import lokesvejImage from '../assets/images/lokesvej_placeholder_1783055982053.jpg';
 import halgaardImage from '../assets/images/HDI/HDI_Forside.jpg';
 import jmMoerksImage from '../assets/images/JJMG9/JJMG9 Forside.jpg';
 
@@ -51,7 +50,7 @@ import jjmg12_3 from '../assets/images/JJMG9/12_JJMG_VD - HEB og eksisterende yd
 export const projects = [
   {
     id: 'halgaard-daginstitution',
-    title: 'HALGÅRD DAGINSTITUTION',
+    title: 'Halgård Daginstitution',
     category: 'Nybyggeri',
     description: 'Nyt og moderne daginstitutionsbyggeri med fokus på lyse rum og holdbare materialer, der skaber de bedste rammer for børns trivsel og udvikling.',
     longDescription: [
@@ -99,7 +98,7 @@ export const projects = [
   },
   {
     id: 'jm-moerks-gade',
-    title: 'J. M. MØRKS GADE',
+    title: 'J. M. Mørks Gade',
     category: 'Renovering af etageejendom',
     description: 'Et spændende og udfordrende projekt i hjertet af Aarhus. Projektet omfatter en omfattende renovering og ombygning med fokus på at bevare bygningens historiske sjæl.',
     longDescription: [
@@ -153,32 +152,5 @@ export const projects = [
     ],
     details: ['Aarhus C', '2024', '838 m²', 'Renovering · 5. semester'],
     align: 'right'
-  },
-  {
-    id: 'lokesvej',
-    title: 'LOKESVEJ',
-    category: 'Etageboligbyggeri',
-    description: 'Etageboligbyggeri opført som en integreret del af den eksisterende bystruktur i Aarhus, bestående af almene familieboliger og erhvervslejemål.',
-    longDescription: [
-      'Ejendommen beliggende på Lokesvej i Aarhus, indgår som en integreret del af den eksisterende bystruktur i området. Projektet består af 7 almene familieboliger med et samlet boligareal på 685 m² samt 2 store erhvervslejemål med et samlet areal på 181 m². De almene boliger er disponeret på 1., 2. og 3. sal samt en penthouselejlighed på 4. sal med et areal på 104 m².',
-      'Fire af boligerne er indrettet som 3-værelses lejligheder med et areal på 108 m², mens tre boliger er indrettet som 2-værelses lejligheder på hver 85 m². På 4. sal etableres en stor tagterrasse orienteret mod sydvest, som er disponeret til fælles brug for bygningens beboere. Stueetagen indrettes med to store erhvervslejemål, velegnede til café, butik eller lignende publikumsorienterede funktioner. Kælderen indrettes med cykelparkering samt individuelle kælderrum til hvert lejemål.'
-    ],
-    image: lokesvejImage,
-    imageGroups: [
-      {
-        name: 'Hovedtegninger',
-        images: []
-      },
-      {
-        name: 'Samlingsdetaljer',
-        images: []
-      },
-      {
-        name: 'Tekniske tegninger',
-        images: []
-      }
-    ],
-    details: ['Aarhus C', '2024', '846 m²', 'Etageboligbyggeri · 4. semester'],
-    align: 'left'
   }
 ];

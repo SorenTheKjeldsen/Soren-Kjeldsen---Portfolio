@@ -78,7 +78,7 @@ export default function Contact() {
               transition={{ delay: 1, duration: 1 }}
               className="text-dark-800 font-light max-w-[600px] mb-12 leading-relaxed"
             >
-              Jeg hjælper med at skabe gennemtænkte og byggetekniske løsninger. Uanset om det gælder nybyggeri, tilbygninger eller renovering, kan jeg være behjælpelig med projektering, materialevalg, byggetilladelser samt rådgivning gennem hele processen.
+              Har du et spørgsmål, eller vil du høre mere om, hvordan jeg kan bidrage til jeres team? Jeg tager gerne en uforpligtende snak og ser frem til at høre fra dig.
             </motion.p>
 
           </motion.div>

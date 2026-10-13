@@ -144,8 +144,8 @@ export default function About() {
       period: '2026 - 3 mdr.',
       icon: ArchitectureIcon,
       tasks: [
-        'Bidrog til projektering og udarbejdelse af tegningsmateriale',
-        'Deltog i projekterings- og koordineringsmøder med entreprenører og ingeniører'
+        'Bidrog til projektering og udarbejdelse af tegningsmateriale.',
+        'Deltog i projekterings- og koordineringsmøder med entreprenører og ingeniører.'
       ]
     },
     {
@@ -201,12 +201,11 @@ export default function About() {
     }
   ];
 
-  const educations = [
+  const educations: Array<{ school: string; degree: string; period: string; icon: any; badge?: string }> = [
     {
       school: 'VIA University College, 8000 Aarhus C',
       degree: 'Bygningskonstruktør, Projekterende',
       period: '2022 - 2026',
-      badge: 'NYT',
       icon: BookOpen
     },
     {
@@ -276,7 +275,7 @@ export default function About() {
                   Gennem min uddannelse og praktik har jeg arbejdet med projektering, visualisering og teknisk dokumentation. Jeg motiveres af nytænkende opgaver, især når de kan brydes ned til overskuelige løsninger. Der er noget tilfredsstillende ved at få mange brikker til at falde på plads og skabe et resultat, der fungerer i praksis.
                 </p>
                 <p>
-                  Jeg kommer oprindeligt fra Vejen, men bor i dag i Risskov sammen med min kæreste. Uden for arbejdet bruger jeg blandt andet tid på møbeldesign, forskellige kreative projekter eller at se en fodboldkamp i fjernsynet. Fælles for det meste af det, jeg interesserer mig for, er, at jeg godt kan lide at skabe noget fra bunden og nørde detaljerne undervejs.
+                  Jeg er 27 år og kommer oprindeligt fra Vejen, men bor i dag i Risskov sammen med min kæreste. Uden for arbejdet bruger jeg blandt andet tid på møbeldesign, forskellige kreative projekter eller at se en fodboldkamp i fjernsynet. Fælles for det meste af det, jeg interesserer mig for, er, at jeg godt kan lide at skabe noget fra bunden og nørde detaljerne undervejs.
                 </p>
                 <p>
                   Som person er jeg ydmyg, jordnær og nem at arbejde sammen med. Jeg tager mit arbejde seriøst og stiller gerne spørgsmål, hvis det kan føre til en bedre løsning. Samtidig tror jeg på, at godt samarbejde og en god omgangstone er mindst lige så vigtigt som de tekniske kompetencer.
@@ -533,7 +532,7 @@ export default function About() {
           className="text-center"
         >
           <h2 className="text-4xl lg:text-5xl font-serif text-white uppercase tracking-wider mb-6">
-            Kreative Hobbyprojekter
+            Mit Kreative Frirum
           </h2>
           <p className="text-white/70 font-light max-w-2xl mx-auto leading-relaxed">
             Her er et udpluk af nogle af de projekter, jeg har lavet i værkstedet. Det er min måde at koble af på og samtidig udfordre min kreativitet gennem håndværk, design og nye idéer.
