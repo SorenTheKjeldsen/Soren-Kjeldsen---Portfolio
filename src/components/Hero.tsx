@@ -36,33 +36,22 @@ export default function Hero() {
             >
               <motion.div
                 animate={{ 
-                  y: [0, -4, 0]
+                  y: [0, -3, 0]
                 }}
                 transition={{ 
                   duration: 4, 
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="inline-flex items-center gap-3 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full border border-brand-green/20 shadow-[0_4px_20px_rgba(43,78,56,0.08)] hover:shadow-[0_4px_24px_rgba(43,78,56,0.14)] hover:border-brand-green/40 hover:bg-white/90 transition-all duration-300 group"
+                className="inline-flex items-center gap-2.5 bg-white/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-brand-green/20 shadow-[0_2px_12px_rgba(43,78,56,0.06)] hover:shadow-[0_4px_16px_rgba(43,78,56,0.12)] hover:border-brand-green/40 hover:bg-white/90 transition-all duration-300 group"
               >
-                <div className="w-6 h-6 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green group-hover:bg-brand-green group-hover:text-white transition-all duration-300">
-                  <Building2 size={13} strokeWidth={2} />
+                <div className="w-5 h-5 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green group-hover:bg-brand-green group-hover:text-white transition-all duration-300">
+                  <Building2 size={11} strokeWidth={2} />
                 </div>
                 
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-medium tracking-[0.18em] uppercase text-dark-900 font-sans">
-                    Lundhild Arkitekter
-                  </span>
-                  <span className="w-1 h-1 rounded-full bg-brand-green/40" />
-                  <span className="text-xs font-normal tracking-[0.12em] uppercase text-brand-green">
-                    Horsens
-                  </span>
-                </div>
-
-                <div className="relative flex h-2 w-2 ml-0.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-40"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
-                </div>
+                <span className="text-[11px] font-medium tracking-[0.16em] uppercase text-dark-900 font-sans pr-1">
+                  Lundhild Arkitekter
+                </span>
               </motion.div>
             </motion.div>
             
