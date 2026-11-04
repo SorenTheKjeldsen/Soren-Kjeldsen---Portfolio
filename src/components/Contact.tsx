@@ -66,7 +66,7 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase block mb-4">Lås Op For Potentialet</span>
+            <span className="text-brand-green tracking-[0.3em] font-medium text-sm uppercase block mb-4">Kontakt & Dialog</span>
             <h2 className="text-4xl md:text-5xl lg:text-[72px] font-serif text-dark-900 leading-tight mb-8 w-full max-w-[800px]">
               <span className="whitespace-nowrap"><RevealText text="Lad os tage en snak" delay={0.2} /></span> <br />
               <span className="italic text-brand-green-light"><RevealText text="over en kop kaffe." delay={0.5} /></span>
@@ -78,7 +78,7 @@ export default function Contact() {
               transition={{ delay: 1, duration: 1 }}
               className="text-dark-800 font-light max-w-[600px] mb-12 leading-relaxed"
             >
-              Har du et spørgsmål, eller vil du høre mere om, hvordan jeg kan bidrage til jeres team? Jeg tager gerne en uforpligtende snak og ser frem til at høre fra dig.
+              Har du et spørgsmål til mine projekter eller min faglige profil? Du er altid velkommen til at række ud via kontaktformularen herunder.
             </motion.p>
 
           </motion.div>

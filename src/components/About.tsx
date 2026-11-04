@@ -137,7 +137,22 @@ export default function About() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeImageIndex, workshopImages.length]);
 
-  const experiences = [
+  const experiences: Array<{
+    company: string;
+    role: string;
+    period: string;
+    icon: any;
+    tasks: string[];
+    badge?: string;
+  }> = [
+    {
+      company: 'Lundhild Arkitekter, 8700 Horsens',
+      role: 'Bygningskonstruktør, projekterende',
+      period: '2026 - nu.',
+      icon: ArchitectureIcon,
+      badge: 'NYT',
+      tasks: []
+    },
     {
       company: 'Vang Arkitekter, 8000 Aarhus C',
       role: 'Bygningskonstruktør, projekterende',
@@ -266,13 +281,13 @@ export default function About() {
                 className="space-y-4 text-dark-800 font-light leading-relaxed text-justify"
               >
                 <p>
-                  Jeg blev færdiguddannet bygningskonstruktør i januar 2026 og har en særlig interesse for BIM, projektering og koordinering. Jeg kan godt lide, når ting er gennemtænkte, strukturerede og ser professionelle ud – hvad enten det gælder en BIM-model, et tegningssæt eller andet.
+                  Jeg blev færdiguddannet bygningskonstruktør i januar 2026 og arbejder i dag som projekterende bygningskonstruktør hos Lundhild Arkitekter i Horsens. Jeg har en særlig interesse for BIM, projektering og koordinering. Jeg kan godt lide, når ting er gennemtænkte, strukturerede og ser professionelle ud – hvad enten det gælder en BIM-model, et tegningssæt eller andet.
                 </p>
                 <p>
                   Jeg er typen, der lægger mærke til detaljerne. Ikke fordi alt skal være perfekt, men fordi de små ting ofte er det, der får helheden til at fungere. Derfor bruger jeg også gerne lidt ekstra tid på layout, formidling og det visuelle udtryk. Et godt projekt skal ikke kun være teknisk korrekt – det skal også være let at forstå og rart at arbejde videre med.
                 </p>
                 <p>
-                  Gennem min uddannelse og praktik har jeg arbejdet med projektering, visualisering og teknisk dokumentation. Jeg motiveres af nytænkende opgaver, især når de kan brydes ned til overskuelige løsninger. Der er noget tilfredsstillende ved at få mange brikker til at falde på plads og skabe et resultat, der fungerer i praksis.
+                  Med min baggrund som tømrer og erfaring fra tegnestuearbejde har jeg en stærk praktisk forankring i mit projekteringsarbejde. Jeg motiveres af komplekse opgaver, især når de kan brydes ned til overskuelige og bygbare løsninger. Der er noget tilfredsstillende ved at få alle byggeriets brikker til at falde på plads og skabe et resultat, der fungerer i praksis.
                 </p>
                 <p>
                   Jeg er 27 år og kommer oprindeligt fra Vejen, men bor i dag i Risskov sammen med min kæreste. Uden for arbejdet bruger jeg blandt andet tid på møbeldesign, forskellige kreative projekter eller at se en fodboldkamp i fjernsynet. Fælles for det meste af det, jeg interesserer mig for, er, at jeg godt kan lide at skabe noget fra bunden og nørde detaljerne undervejs.
@@ -316,11 +331,24 @@ export default function About() {
                     transition={{ duration: 0.5, delay: idx * 0.15 }}
                     className="relative pl-12 md:pl-20"
                   >
-                    <div className="absolute -left-1 md:left-2 top-4 w-10 h-10 bg-brand-sand-light rounded-full border-2 border-brand-green flex items-center justify-center z-10 shadow-sm">
-                      <exp.icon size={20} className="text-brand-green" strokeWidth={1.5} />
+                    <div className={`absolute -left-1 md:left-2 top-4 w-10 h-10 bg-brand-sand-light rounded-full border-2 ${exp.badge ? 'border-emerald-500 ring-4 ring-emerald-500/20' : 'border-brand-green'} flex items-center justify-center z-10 shadow-sm transition-all`}>
+                      <exp.icon size={20} className={exp.badge ? "text-emerald-600" : "text-brand-green"} strokeWidth={1.5} />
                     </div>
                     
-                    <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-white/60 hover:bg-white/70 transition-colors">
+                    <div className="bg-white/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-sm border border-white/60 hover:bg-white/70 transition-colors relative">
+                      {exp.badge && (
+                        <motion.div
+                          animate={{ scale: [1, 1.05, 1], boxShadow: ["0 0 0 0 rgba(16, 185, 129, 0.4)", "0 0 0 6px rgba(16, 185, 129, 0)", "0 0 0 0 rgba(16, 185, 129, 0)"] }}
+                          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                          className="absolute -top-3 left-6 md:left-8 bg-emerald-600 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full shadow-md flex items-center gap-1.5"
+                        >
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-200 opacity-80"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                          </span>
+                          {exp.badge}
+                        </motion.div>
+                      )}
                       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
                         <div>
                           <h4 className="text-lg md:text-xl font-medium text-dark-900 mb-1">{exp.company}</h4>

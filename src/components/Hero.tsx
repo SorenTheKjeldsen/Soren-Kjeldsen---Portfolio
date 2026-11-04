@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Building2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import portraitImage from '../assets/images/Billede fra BAKS.png';
 import { RevealText } from './RevealText';
@@ -29,25 +29,40 @@ export default function Hero() {
             </h1>
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 1 }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
               className="mb-8"
             >
               <motion.div
                 animate={{ 
-                  y: [0, -8, 0],
-                  opacity: [0.85, 1, 0.85]
+                  y: [0, -4, 0]
                 }}
                 transition={{ 
-                  duration: 2, 
+                  duration: 4, 
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="inline-flex items-center gap-2 bg-brand-green/10 text-brand-green px-4 py-2 rounded-full border border-brand-green/20 shadow-[0_0_15px_rgba(30,64,51,0.1)]"
+                className="inline-flex items-center gap-3 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full border border-brand-green/20 shadow-[0_4px_20px_rgba(43,78,56,0.08)] hover:shadow-[0_4px_24px_rgba(43,78,56,0.14)] hover:border-brand-green/40 hover:bg-white/90 transition-all duration-300 group"
               >
-                <div className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
-                <span className="text-xs font-bold tracking-[0.2em] uppercase">Jobsøgende</span>
+                <div className="w-6 h-6 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green group-hover:bg-brand-green group-hover:text-white transition-all duration-300">
+                  <Building2 size={13} strokeWidth={2} />
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-medium tracking-[0.18em] uppercase text-dark-900 font-sans">
+                    Lundhild Arkitekter
+                  </span>
+                  <span className="w-1 h-1 rounded-full bg-brand-green/40" />
+                  <span className="text-xs font-normal tracking-[0.12em] uppercase text-brand-green">
+                    Horsens
+                  </span>
+                </div>
+
+                <div className="relative flex h-2 w-2 ml-0.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-40"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
+                </div>
               </motion.div>
             </motion.div>
             
